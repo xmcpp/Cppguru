@@ -300,6 +300,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EventMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EventMonitorObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MonitorObject.cpp"
 				>
 			</File>
