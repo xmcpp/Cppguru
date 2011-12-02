@@ -18,7 +18,7 @@ void MessageDispatcher::SendMessage(unsigned int messageType , const ParameterSe
 	ListenerIterator itr = Begin();
 	while (itr!=End())
 	{
-		(*itr)->ReceiveMessage(messageType , messageParam);
+		(*itr)->ReceiveMessage(messageType , const_cast<ParameterSet&>( messageParam ));
 		itr++;
 	}
 }

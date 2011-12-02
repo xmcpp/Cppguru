@@ -30,7 +30,7 @@ public:
 	@param messageType 消息类型标识
 	@param messageParam 消息参数集对象
 	*/
-	virtual void ReceiveMessage(unsigned int messageType , const ParameterSet& messageParam){};
+	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam){};
 };
 
 
