@@ -284,54 +284,6 @@
 			Name="Trigger"
 			>
 			<File
-				RelativePath=".\ActionObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ActionObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ActionObjectSet.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ActionObjectSet.h"
-				>
-			</File>
-			<File
-				RelativePath=".\EventMonitorObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\EventMonitorObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MonitorObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MonitorObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MonitorObjectSet.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MonitorObjectSet.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PollMonitorObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PollMonitorObject.h"
-				>
-			</File>
-			<File
 				RelativePath=".\TriggerObject.cpp"
 				>
 			</File>
@@ -339,6 +291,70 @@
 				RelativePath=".\TriggerObject.h"
 				>
 			</File>
+			<Filter
+				Name="MonitorObject"
+				>
+				<File
+					RelativePath=".\EventMonitorObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\EventMonitorObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MonitorObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MonitorObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MonitorObjectSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MonitorObjectSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\PollMonitorManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\PollMonitorManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\PollMonitorObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\PollMonitorObject.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ActionObject"
+				>
+				<File
+					RelativePath=".\ActionObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ActionObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ActionObjectSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ActionObjectSet.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Timer"
