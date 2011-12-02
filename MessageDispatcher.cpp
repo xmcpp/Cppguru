@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "MessageDispatcher.h"
-
+#include "StringConverter.h"
 
 
 template<> MessageDispatcher* Singleton<MessageDispatcher>::ms_Singleton	= 0;
@@ -41,4 +41,10 @@ void MessageDispatcher::Update(float timeSinceLastFrame)
 	}
 
 	mMessageList.clear();
+	
+	//发送每帧事件
+	ParameterSet param;
+	param.SetValue( "interval" , StringConverter::toString( timeSinceLastFrame ) );
+	SendMessage( MD_TIME_FRAMETICK , param );
+
 }
