@@ -43,7 +43,11 @@ public:
 class IMonitorObject 
 {
 public:
-	IMonitorObject( const std::string & name = "" );
+	/**构造函数
+	@param name 监控对象的名称,默认为空
+	@param bAutoReset 是否是自动复位对象，默认为false
+	*/
+	IMonitorObject( const std::string & name = "" , bool bAutoReset = false );
 	virtual ~IMonitorObject(){}
 
 public:
@@ -55,6 +59,10 @@ public:
 	const std::string & getName(){ return m_name; }
 	void setName( const std::string & name ){ m_name = name; }
 	
+	/**设置和获得是否自动复位*/
+	bool isAutoReset(){ return m_isAutoReset; }
+	void setAutoReset( bool val ){ m_isAutoReset = val; }
+
 	/**启用/禁用Monitor对象
 	@param val true为启用对象，false为禁用对象
 	*/
@@ -77,7 +85,7 @@ public:
 	*/
 	virtual void trigger();
 	virtual void unTrigger();
-	
+
 	/**对象监听者管理*/
 	void addListener( IMonitorEventListener * listener );
 	void removeListener( IMonitorEventListener * listener );
@@ -92,6 +100,7 @@ protected:
 	typedef std::set<IMonitorEventListener*>::const_iterator listenerSetItor;
 	bool m_activeState; //是否激活的状态位
 	bool m_isEnable;	//是否启用
+	bool m_isAutoReset; //是否自动复位，即是否有激活后立即自动复位的功能,默认为false，不自动复位
 };
 
 

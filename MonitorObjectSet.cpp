@@ -21,6 +21,9 @@ void MonitorObjectSet::addMonitorObject( IMonitorObject * object )
 
 	//监听子监视器对象的事件
 	object->addListener( this );
+
+	//不能自动复位，否则多条件就不能实现了
+	object->setAutoReset( false );
 }
 
 void MonitorObjectSet::removeMonitorObject( IMonitorObject * object )
@@ -49,7 +52,7 @@ void MonitorObjectSet::onAlarmActive( IMonitorObject * object )
 	if ( !m_activeState && isAllActive() )
 	{
 		//只有当前未激活，并且子Monitor全激活，则发事件
-		sendAlarmMsg();
+		trigger();
 		m_activeState = true;
 	}
 }
@@ -59,7 +62,7 @@ void MonitorObjectSet::onSilenceActive(  IMonitorObject * object )
 	if ( m_activeState && !isAllActive() )
 	{
 		//只有当前已经激活，并且子Monitor不是全激活，则发事件
-		sendSilenceMsg();
+		unTrigger();
 		m_activeState = false;
 	}
 }

@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "MonitorObject.h"
 
-IMonitorObject::IMonitorObject( const std::string & name )
-:m_name(name),m_activeState(false),m_isEnable(false)
+IMonitorObject::IMonitorObject( const std::string & name , bool bAutoReset )
+:m_name(name),m_activeState(false),m_isEnable(false),m_isAutoReset(bAutoReset)
 {
 
 }
@@ -34,6 +34,12 @@ void IMonitorObject::trigger()
 	{
 		sendAlarmMsg();
 		m_activeState = true;
+
+		//是否自动复位
+		if ( m_isAutoReset )
+		{
+			unTrigger(); //执行复位操作
+		}
 	}
 }
 

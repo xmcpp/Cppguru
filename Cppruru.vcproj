@@ -324,6 +324,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PollMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PollMonitorObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriggerObject.cpp"
 				>
 			</File>
