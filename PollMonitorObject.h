@@ -25,7 +25,15 @@ public:
 	virtual ~PollMonitorObject(){}
 
 public:
+	/**轮询方法，每次轮询需要调用该方法
+	@param time 与上次轮询之间的时间间隔
+	*/
 	virtual void update( float time );
+
+	/**检测方法
+	@remark 每次轮询时调用该方法来执行具体的监测功能。需要具体的子类重载该功能
+	@ret bool 如果返回true，表示监测的条件满足。如果返回false，表示监测的条件不满足
+	*/
 	virtual bool onCheck(){ return false; }
 };
 

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "EventMonitorObject.h"
-#include "Singleton.h"
 
 EventMonitorObject::EventMonitorObject()
 :m_monitorEventType(0)
@@ -20,7 +19,7 @@ bool EventMonitorObject::clear()
 	return true;
 }
 
-void EventMonitorObject::ReceiveMessage(unsigned int messageType , const ParameterSet& messageParam)
+void EventMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
 {
 	if ( !m_isEnable ) return;
 

@@ -33,7 +33,7 @@ public:
 
 	void setMonitorEvent( unsigned int messageType ){ m_monitorEventType = messageType; }
 protected:
-	virtual void ReceiveMessage(unsigned int messageType , const ParameterSet& messageParam);
+	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
 
 protected:
 	unsigned int m_monitorEventType;
