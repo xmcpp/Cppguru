@@ -22,8 +22,8 @@ Update:
 class MonitorObjectSet : public IMonitorObject , public IMonitorEventListener
 {
 public:
-	MonitorObjectSet();
-	virtual ~MonitorObjectSet();
+	MonitorObjectSet(){}
+	virtual ~MonitorObjectSet(){}
 
 public:
 	/**初始化和清除*/
