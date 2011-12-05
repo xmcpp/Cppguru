@@ -32,9 +32,9 @@ void IMonitorObject::trigger()
 	
 	if( !m_activeState )
 	{
-		sendAlarmMsg();
 		m_activeState = true;
-
+		sendAlarmMsg();
+		
 		//是否自动复位
 		if ( m_isAutoReset )
 		{
@@ -49,8 +49,8 @@ void IMonitorObject::unTrigger()
 
 	if( m_activeState )
 	{
-		sendSilenceMsg();
 		m_activeState = false;
+		sendSilenceMsg();
 	}
 }
 
