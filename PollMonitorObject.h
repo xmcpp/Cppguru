@@ -21,12 +21,20 @@ Update:
 class PollMonitorObject : public IMonitorObject
 {
 public:
-	PollMonitorObject(){}
+	PollMonitorObject( float defaultPollTime = 0.1f )
+		:m_interVal(defaultPollTime),m_lastTime(0.0f)
+	{}
 	virtual ~PollMonitorObject(){}
 
 public:
+	/**设置轮询时间间隔，默认为0.1秒，构造时也可直接设置
+	@param time 与上次轮询之间的时间间隔,单位为秒
+	*/
+	void setPollTime( float time ){ m_interVal = time; }
+	float getPollTime(){ return m_interVal; }
+
 	/**轮询方法，每次轮询需要调用该方法
-	@param time 与上次轮询之间的时间间隔
+	@param time 与上次轮询之间的时间间隔,单位为秒
 	*/
 	virtual void update( float time );
 
@@ -35,6 +43,11 @@ public:
 	@ret bool 如果返回true，表示监测的条件满足。如果返回false，表示监测的条件不满足
 	*/
 	virtual bool onCheck(){ return false; }
+
+	virtual void enable( bool val );
+protected:
+	float m_interVal; //记录间隔多久轮询一次
+	float m_lastTime; //记录已经间隔多久
 };
 
 #endif //__POOLMONITOROBJECT_H__
