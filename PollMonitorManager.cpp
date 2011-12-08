@@ -42,7 +42,7 @@ void PollMonitorManager::update( float time )
 {
 	for ( setItor it = m_set.begin() ; it != m_set.end() ; it++ )
 	{
-		(*it)->update( time );
+		//(*it)->update( time );
 	}
 }
 

@@ -11,6 +11,9 @@ Author: 徐淼
 Date: 2011.12.2
 
 Update: 
+2011.12.8
+	将轮询监控对象改为直接收系统的事件，来处理轮询流程，不需要单独增加
+轮询管理对象
 ***********************************************************************/
 
 #ifndef __POOLMONITOROBJECT_H__
@@ -27,16 +30,13 @@ public:
 	virtual ~PollMonitorObject(){}
 
 public:
+	virtual bool init();
+	virtual bool clear();
 	/**设置轮询时间间隔，默认为0.1秒，构造时也可直接设置
 	@param time 与上次轮询之间的时间间隔,单位为秒
 	*/
 	void setPollTime( float time ){ m_interVal = time; }
 	float getPollTime(){ return m_interVal; }
-
-	/**轮询方法，每次轮询需要调用该方法
-	@param time 与上次轮询之间的时间间隔,单位为秒
-	*/
-	virtual void update( float time );
 
 	/**检测方法
 	@remark 每次轮询时调用该方法来执行具体的监测功能。需要具体的子类重载该功能
@@ -45,6 +45,8 @@ public:
 	virtual bool onCheck(){ return false; }
 
 	virtual void enable( bool val );
+protected:
+	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
 protected:
 	float m_interVal; //记录间隔多久轮询一次
 	float m_lastTime; //记录已经间隔多久

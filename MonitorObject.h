@@ -8,13 +8,17 @@ Author: 徐淼
 
 Date: 2011.11.28
 
-Update: 
+Update:
+2011.12.8
+监控对象接口从事件接口继承，这样可以将轮询事件对象的update方法去除
+所有都由内部的事件机制完成，简化设计。
 ***********************************************************************/
 
 #ifndef __MONITOROBJECT_H__
 #define __MONITOROBJECT_H__
 
 #include <set>
+#include "MessageDispatcher.h"
 
 class IMonitorObject;
 
@@ -40,7 +44,7 @@ public:
 /**monitor的对象接口
 *
 */
-class IMonitorObject 
+class IMonitorObject : public IMessageReceiver
 {
 public:
 	/**构造函数

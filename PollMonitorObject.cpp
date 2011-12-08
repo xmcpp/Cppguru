@@ -1,5 +1,18 @@
 #include "pch.h"
 #include "PollMonitorObject.h"
+#include "StringConverter.h"
+
+bool PollMonitorObject::init()
+{
+	MessageDispatcher::getSingleton().addListener( this );
+	return true;
+}
+
+bool PollMonitorObject::clear()
+{
+	MessageDispatcher::getSingleton().removeListener( this );
+	return true;
+}
 
 void PollMonitorObject::enable( bool val )
 {
@@ -9,17 +22,20 @@ void PollMonitorObject::enable( bool val )
 	m_lastTime = 0.0f;
 }
 
-void PollMonitorObject::update( float time )
+void PollMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
 {
 	if ( !m_isEnable ) return;
-	
-	m_lastTime += time;
-	
-	if ( m_lastTime >= m_interVal )
+
+	if ( messageType == MD_TIME_FRAMETICK )
 	{
-		if ( onCheck() )
-			trigger();
-		
-		m_lastTime = 0.0f;
-	}	
+		m_lastTime += StringConverter::parseFloat( messageParam.GetValue("interval") );
+
+		if ( m_lastTime >= m_interVal )
+		{
+			if ( onCheck() )
+				trigger();
+
+			m_lastTime = 0.0f;
+		}	
+	}
 }

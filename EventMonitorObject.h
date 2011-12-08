@@ -14,15 +14,16 @@ Author: 徐淼
 Date: 2011.12.1
 
 Update: 
+2011.12.8
+将事件接口提至基类
 ***********************************************************************/
 
 #ifndef __EVENTMONITOROBJECT_H__
 #define __EVENTMONITOROBJECT_H__
 
-#include "MessageDispatcher.h"
 #include "MonitorObject.h"
 
-class EventMonitorObject : public IMonitorObject , public IMessageReceiver
+class EventMonitorObject : public IMonitorObject 
 {
 public:
 	EventMonitorObject();
