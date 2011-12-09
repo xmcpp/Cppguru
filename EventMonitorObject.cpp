@@ -21,6 +21,8 @@ bool EventMonitorObject::clear()
 
 void EventMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
 {
+	IMonitorObject::ReceiveMessage( messageType , messageParam );
+
 	if ( !m_isEnable ) return;
 
 	if ( m_monitorEventType == messageType )

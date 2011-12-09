@@ -1,10 +1,31 @@
 #include "pch.h"
 #include "MonitorObject.h"
+#include "StringConverter.h"
 
 IMonitorObject::IMonitorObject( const std::string & name , bool bAutoReset )
 :m_name(name),m_activeState(false),m_isEnable(false),m_isAutoReset(bAutoReset)
+,m_enableDeferred(false),m_baseDeferredTime(0.0f),m_baseDeferredTimeRecord(0.0f)
 {
 
+}
+
+void IMonitorObject::enable( bool val , bool bDeferredStart , float deferredTime )
+{
+	if ( val == m_isEnable ) return;
+	
+	//如果不是延迟启动，则直接修改状态并返回
+	if ( !bDeferredStart ) 
+	{
+		m_isEnable = !m_isEnable;
+		return;
+	}
+
+	//记录需要延迟的时间
+	m_baseDeferredTime = (deferredTime < 0.0f)?0.0f:deferredTime;
+
+	//开启延迟
+	m_enableDeferred = true;
+	
 }
 
 void IMonitorObject::addListener( IMonitorEventListener * listener )
@@ -69,3 +90,22 @@ void IMonitorObject::sendSilenceMsg()
 		(*itor)->onSilenceActive( this );
 	}
 }
+
+void IMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
+{
+	if ( !m_enableDeferred ) return;
+
+	if ( messageType == MD_TIME_FRAMETICK )
+	{
+		m_baseDeferredTimeRecord += StringConverter::parseFloat( messageParam.GetValue("interval") );
+
+		if ( m_baseDeferredTimeRecord >= m_baseDeferredTime )
+		{
+			m_isEnable = !m_isEnable;
+			m_enableDeferred = false;
+			m_baseDeferredTimeRecord = 0.0f;
+			m_baseDeferredTime = 0.0f;
+		}	
+	}
+}
+

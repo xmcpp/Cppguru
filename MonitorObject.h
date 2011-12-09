@@ -12,6 +12,9 @@ Update:
 2011.12.8
 监控对象接口从事件接口继承，这样可以将轮询事件对象的update方法去除
 所有都由内部的事件机制完成，简化设计。
+
+2011.12.9
+增加enable方法延迟启动的功能,即可以在指定时间后开启或关闭触发器
 ***********************************************************************/
 
 #ifndef __MONITOROBJECT_H__
@@ -70,7 +73,7 @@ public:
 	/**启用/禁用Monitor对象
 	@param val true为启用对象，false为禁用对象
 	*/
-	virtual void enable( bool val ){ m_isEnable = val; }
+	virtual void enable( bool val , bool bDeferredStart = false , float deferredTime = 1.0f );
 	
 	/**获取是否启动的状态*/
 	virtual bool isEnable() { return m_isEnable; }
@@ -98,6 +101,8 @@ protected:
 	/**向所有监听者发送事件*/
 	void sendAlarmMsg();
 	void sendSilenceMsg();
+
+	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
 protected:
 	std::string m_name;
 	std::set<IMonitorEventListener*> m_listenerSet;
@@ -105,6 +110,10 @@ protected:
 	bool m_activeState; //是否激活的状态位
 	bool m_isEnable;	//是否启用
 	bool m_isAutoReset; //是否自动复位，即是否有激活后立即自动复位的功能,默认为false，不自动复位
+private:
+	float m_baseDeferredTimeRecord; //记录延迟经历的时间
+	float m_baseDeferredTime; //记录延迟时间
+	bool m_enableDeferred;    //记录是否开启了延迟启动
 };
 
 

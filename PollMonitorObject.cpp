@@ -24,6 +24,8 @@ void PollMonitorObject::enable( bool val )
 
 void PollMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
 {
+	IMonitorObject::ReceiveMessage( messageType , messageParam );
+
 	if ( !m_isEnable ) return;
 
 	if ( messageType == MD_TIME_FRAMETICK )
