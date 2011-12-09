@@ -28,14 +28,42 @@ void TriggerTestSuiteInit::SetUp()
 	m_objectA = new IMonitorObject();
 	m_objectB = new IMonitorObject();
 	m_objectC = new IMonitorObject();
-	m_objectSet = new ANDMonitorObject();
 }
 
 void TriggerTestSuiteInit::TearDown()
 {
-	delete m_objectSet;
 	delete m_objectC;
 	delete m_objectB;
 	delete m_objectA;
 
+}
+
+void ANDMonitorTest::SetUp()
+{
+	TriggerTestSuiteInit::SetUp();
+
+	m_objectSet = new ANDMonitorObject();
+}
+
+void ANDMonitorTest::TearDown()
+{
+	TriggerTestSuiteInit::TearDown();
+
+	m_objectSet->clear();
+	delete m_objectSet;
+}
+
+void ORMonitorTest::SetUp()
+{
+	TriggerTestSuiteInit::SetUp();
+
+	m_objectSet = new ORMonitorObject();
+}
+
+void ORMonitorTest::TearDown()
+{
+	TriggerTestSuiteInit::TearDown();
+
+	m_objectSet->clear();
+	delete m_objectSet;
 }
