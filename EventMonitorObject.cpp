@@ -9,13 +9,11 @@ EventMonitorObject::EventMonitorObject()
 
 bool EventMonitorObject::init()
 {
-	MessageDispatcher::getSingleton().addListener( this );
 	return true;
 }
 
 bool EventMonitorObject::clear()
 {
-	MessageDispatcher::getSingleton().removeListener( this );
 	return true;
 }
 
