@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="F:\study\src\3rdLib\include\;..\"
+				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,7 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="gtestd.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="F:\study\src\3rdLib\lib\GTest\Debug"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
