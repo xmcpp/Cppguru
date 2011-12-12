@@ -24,6 +24,48 @@ protected:
 	IMonitorObject * m_objectC;
 };
 
+TEST_F(TriggerTestSuiteInit , DeferredMonitorTest )
+{
+	//开启延迟启动，时间1秒
+	m_objectA->enable( true , true );
+	
+	//此时应该未启动
+	EXPECT_FALSE( m_objectA->isEnable() );
+	ParameterSet param;
+	param.SetValue("interval","0.3"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.3秒的事件
+	EXPECT_FALSE( m_objectA->isEnable() );
+	
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.3秒的事件
+	EXPECT_FALSE( m_objectA->isEnable() );
+
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.3秒的事件
+	EXPECT_FALSE( m_objectA->isEnable() );
+
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.3秒的事件
+	//此时应该启动
+	EXPECT_TRUE( m_objectA->isEnable() );
+	
+	//应该立即关闭
+	m_objectA->enable( false );
+	EXPECT_FALSE( m_objectA->isEnable() );
+
+	//开启延迟启动，时间1秒
+	m_objectA->enable( true , true );
+	EXPECT_FALSE( m_objectA->isEnable() );
+
+	param.SetValue("interval","0.6"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.6秒的事件
+	EXPECT_FALSE( m_objectA->isEnable() );
+	
+	//中止延迟启动
+	m_objectA->stopDeferredState();
+	
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.6秒的事件
+	EXPECT_FALSE( m_objectA->isEnable() ); //应该不会启动了
+}
+
+
 /**ANDMonitor测试用例
 *
 */
