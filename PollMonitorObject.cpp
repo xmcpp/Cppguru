@@ -4,13 +4,11 @@
 
 bool PollMonitorObject::init()
 {
-	MessageDispatcher::getSingleton().addListener( this );
 	return true;
 }
 
 bool PollMonitorObject::clear()
 {
-	MessageDispatcher::getSingleton().removeListener( this );
 	return true;
 }
 
