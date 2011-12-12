@@ -47,6 +47,7 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="pch.h"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -173,6 +174,82 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\ActionObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ActionObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ActionObjectSet.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ActionObjectSet.h"
+				>
+			</File>
+			<File
+				RelativePath="..\EventMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\EventMonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MessageDispatcher.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MessageDispatcher.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MessageTypeDef.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObjectSet.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObjectSet.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ParameterSet.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ParameterSet.h"
+				>
+			</File>
+			<File
+				RelativePath="..\PollMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\PollMonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\StringConverter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\StringConverter.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="App"
@@ -188,7 +265,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath=".\pch.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -208,7 +285,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath=".\pch.h"
 				>
 			</File>
 			<File
@@ -224,19 +301,23 @@
 			Name="TestSuite"
 			>
 			<File
-				RelativePath=".\TestGroup.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TestGroup.h"
-				>
-			</File>
-			<File
 				RelativePath=".\TriggerTestSuiteInit.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\TriggerTestSuiteInit.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="HelpClass"
+			>
+			<File
+				RelativePath=".\TestPollMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestPollMonitorObject.h"
 				>
 			</File>
 		</Filter>

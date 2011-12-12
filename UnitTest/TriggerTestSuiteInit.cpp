@@ -1,25 +1,13 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "TriggerTestSuiteInit.h"
-
-//
-
-
-#include "PollMonitorManager.cpp"
-#include "MessageDispatcher.cpp"
-#include "StringConverter.cpp"
-#include "ParameterSet.cpp"
-#include "MonitorObject.cpp"
-#include "MonitorObjectSet.cpp"
 
 void TriggerTestSuiteInit::SetUpTestCase()
 {
 	new MessageDispatcher();
-	new PollMonitorManager();
 }
 
 void TriggerTestSuiteInit::TearDownTestCase()
 {
-	delete PollMonitorManager::getSingletonPtr();
 	delete MessageDispatcher::getSingletonPtr();
 }
 
@@ -75,3 +63,36 @@ void ORMonitorTest::TearDown()
 	delete m_objectSet;
 }
 
+void EventMonitorTest::SetUp()
+{
+	TriggerTestSuiteInit::SetUp();
+
+	m_eventObj = new EventMonitorObject();
+	m_eventObj->init();
+	
+}
+
+void EventMonitorTest::TearDown()
+{
+	TriggerTestSuiteInit::TearDown();
+
+	m_eventObj->clear();
+	delete m_eventObj;
+}
+
+void PollMonitorTest::SetUp()
+{
+	TriggerTestSuiteInit::SetUp();
+
+	m_pollObj = new TestPollMonitorObject();
+	m_pollObj->init();
+
+}
+
+void PollMonitorTest::TearDown()
+{
+	TriggerTestSuiteInit::TearDown();
+
+	m_pollObj->clear();
+	delete m_pollObj;
+}

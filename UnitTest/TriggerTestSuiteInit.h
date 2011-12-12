@@ -2,10 +2,11 @@
 #define __TRIGGERTESTSUITEINIT_H__
 
 #include "pch.h"
-#include "PollMonitorManager.h"
 #include "MessageDispatcher.h"
 #include "MonitorObject.h"
 #include "MonitorObjectSet.h"
+#include "EventMonitorObject.h"
+#include "TestPollMonitorObject.h"
 
 /**触发器模块测试包
 *
@@ -24,6 +25,7 @@ protected:
 	IMonitorObject * m_objectC;
 };
 
+//延迟触发器测试
 TEST_F(TriggerTestSuiteInit , DeferredMonitorTest )
 {
 	//开启延迟启动，时间1秒
@@ -64,7 +66,6 @@ TEST_F(TriggerTestSuiteInit , DeferredMonitorTest )
 	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.6秒的事件
 	EXPECT_FALSE( m_objectA->isEnable() ); //应该不会启动了
 }
-
 
 /**ANDMonitor测试用例
 *
@@ -137,5 +138,70 @@ TEST_F( ORMonitorTest , TestORMonitorSet)
 	EXPECT_FALSE(m_objectSet->isAlarmed());
 }
 
+
+/**EventMonitor测试用例
+*
+*/
+class EventMonitorTest : public TriggerTestSuiteInit
+{
+public:
+	virtual void SetUp();
+	virtual void TearDown();
+protected:
+	EventMonitorObject * m_eventObj;
+};
+
+TEST_F( EventMonitorTest , TestEventMonitor)
+{
+	m_eventObj->setMonitorEvent( 100 );
+	m_eventObj->enable( true );
+
+	EXPECT_FALSE(m_eventObj->isAlarmed());
+	
+	//发送其它事件，不能触发
+	MessageDispatcher::getSingleton().SendMessage( 200 , ParameterSet::EmptyParameterSet );
+	EXPECT_FALSE(m_eventObj->isAlarmed());
+	
+	//发送监听的时间，被触发
+	MessageDispatcher::getSingleton().SendMessage( 100 , ParameterSet::EmptyParameterSet );
+	EXPECT_TRUE(m_eventObj->isAlarmed());
+}
+
+/**PollMonitorObject测试用例
+*
+*/
+class PollMonitorTest : public TriggerTestSuiteInit
+{
+public:
+	virtual void SetUp();
+	virtual void TearDown();
+protected:
+	TestPollMonitorObject * m_pollObj;
+};
+
+TEST_F( PollMonitorTest , TestPollMonitor)
+{
+	m_pollObj->enable( true );
+
+	EXPECT_FALSE(m_pollObj->isAlarmed());
+	
+	ParameterSet param;
+	param.SetValue("interval","0.05"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.05秒的事件
+	EXPECT_FALSE(m_pollObj->isAlarmed());
+	
+	//检测失败，不触发
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.05秒的事件
+	EXPECT_FALSE(m_pollObj->isAlarmed());
+
+	m_pollObj->cheat();
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.05秒的事件
+	EXPECT_FALSE(m_pollObj->isAlarmed());
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.05秒的事件
+
+	//应该触发
+	EXPECT_TRUE(m_pollObj->isAlarmed());
+
+}
 
 #endif //__TRIGGERTESTSUITEINIT_H__
