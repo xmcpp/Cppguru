@@ -55,7 +55,7 @@ public:
 	@param bAutoReset 是否是自动复位对象，默认为false
 	*/
 	IMonitorObject( const std::string & name = "" , bool bAutoReset = false );
-	virtual ~IMonitorObject(){}
+	virtual ~IMonitorObject();
 
 public:
 	/**初始化和清除*/
@@ -77,7 +77,7 @@ public:
 	
 	/**获取是否启动的状态*/
 	virtual bool isEnable() { return m_isEnable; }
-	
+
 	/**获取是否激活的状态
 	@remark 激活和未激活状态是互斥的，状态只能在这两个之中变化
 	*/
@@ -97,6 +97,9 @@ public:
 	void addListener( IMonitorEventListener * listener );
 	void removeListener( IMonitorEventListener * listener );
 	void clearAllListener();
+
+	/*打断延迟启动的状态*/
+	void stopDeferredState();
 protected:
 	/**向所有监听者发送事件*/
 	void sendAlarmMsg();

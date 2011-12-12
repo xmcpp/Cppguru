@@ -6,7 +6,12 @@ IMonitorObject::IMonitorObject( const std::string & name , bool bAutoReset )
 :m_name(name),m_activeState(false),m_isEnable(false),m_isAutoReset(bAutoReset)
 ,m_enableDeferred(false),m_baseDeferredTime(0.0f),m_baseDeferredTimeRecord(0.0f)
 {
+	MessageDispatcher::getSingleton().addListener( this );
+}
 
+IMonitorObject::~IMonitorObject()
+{
+	MessageDispatcher::getSingleton().removeListener( this );
 }
 
 void IMonitorObject::enable( bool val , bool bDeferredStart , float deferredTime )
@@ -102,10 +107,18 @@ void IMonitorObject::ReceiveMessage(unsigned int messageType , ParameterSet& mes
 		if ( m_baseDeferredTimeRecord >= m_baseDeferredTime )
 		{
 			m_isEnable = !m_isEnable;
-			m_enableDeferred = false;
-			m_baseDeferredTimeRecord = 0.0f;
-			m_baseDeferredTime = 0.0f;
+
+			//ֹͣ�ӳټ��״̬
+			stopDeferredState();
 		}	
 	}
 }
 
+void IMonitorObject::stopDeferredState()
+{
+	if ( !m_enableDeferred ) return;
+	
+	m_enableDeferred = false;
+	m_baseDeferredTimeRecord = 0.0f;
+	m_baseDeferredTime = 0.0f;
+}
