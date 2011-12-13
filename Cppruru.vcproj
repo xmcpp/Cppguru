@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="../3rdlib/include/lua"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,7 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lua514d.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -133,7 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lua514.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../3rdlib/lib/lua/release"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -383,6 +388,14 @@
 		<Filter
 			Name="LuaScript"
 			>
+			<File
+				RelativePath=".\ScriptSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ScriptSystem.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\readme.txt"
