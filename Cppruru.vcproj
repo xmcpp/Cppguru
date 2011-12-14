@@ -63,6 +63,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="lua514d.lib"
+				OutputFile="./bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug"
 				GenerateDebugInformation="true"
@@ -137,6 +138,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="lua514.lib"
+				OutputFile="./bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../3rdlib/lib/lua/release"
 				GenerateDebugInformation="true"

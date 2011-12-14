@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\"
+				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\;..\..\3rdLib\include\lua"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,9 +62,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtestd.lib"
+				AdditionalDependencies="gtestd.lib lua514d.lib"
+				OutputFile="../bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -136,6 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				OutputFile="../bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -243,6 +245,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ScriptSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ScriptSystem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\StringConverter.cpp"
 				>
 			</File>
@@ -300,6 +310,14 @@
 		<Filter
 			Name="TestSuite"
 			>
+			<File
+				RelativePath=".\ScriptTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ScriptTestSuite.h"
+				>
+			</File>
 			<File
 				RelativePath=".\TriggerTestSuiteInit.cpp"
 				>
