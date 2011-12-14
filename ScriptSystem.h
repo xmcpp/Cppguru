@@ -23,9 +23,21 @@ public:
 	ScriptSystem();
 	~ScriptSystem();
 public:
+	/**执行lua脚本中的全局函数
+	@desc 该方法只能调用无输入和输出参数的lua函数
+	还需要考虑能调用在table中的方法，最好能自适应输入的名称中有 . 的，在调用时自动支持table的寻址方式
+	*/
 	bool executeGlobalFunction( const std::string & name );
+	
+	bool executeGlobalFunction( const std::string & name , bool & ret );
 
 	bool executeFile( const std::string & fileName );
+
+public:
+	//这方法帮助单元测试模块，用来监测各种调用之后是否有栈泄露
+	int getLuaStateTop();
+private:
+	bool checkFunction( const std::string & name );
 private:
 	lua_State * m_state;
 };
