@@ -341,6 +341,14 @@
 					RelativePath=".\PollMonitorObject.h"
 					>
 				</File>
+				<File
+					RelativePath=".\ScriptMonitorObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ScriptMonitorObject.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="ActionObject"
