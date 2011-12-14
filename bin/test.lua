@@ -1,4 +1,20 @@
-function cppgurutest()
-		local i = 0;
-		i = i+1;
+local value = false;
+
+function setBoolValue()
+	value = true;
+end;
+
+function getBoolValue()
+    return value;
+end;
+
+
+function getIntValue()
+    return 1;
+end;
+
+t = {};
+
+function t.a()
+
 end;
