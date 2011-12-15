@@ -32,7 +32,8 @@ public:
 	bool executeGlobalFunction( const std::string & name , bool & ret );
 
 	bool executeFile( const std::string & fileName );
-
+	
+	bool executeFunction( const std::string & name );
 public:
 	//这方法帮助单元测试模块，用来监测各种调用之后是否有栈泄露
 	int getLuaStateTop();
