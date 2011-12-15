@@ -30,15 +30,24 @@ public:
 	bool executeGlobalFunction( const std::string & name );
 	
 	bool executeGlobalFunction( const std::string & name , bool & ret );
-
-	bool executeFile( const std::string & fileName );
 	
+	/**执行lua脚本中函数,并不一定要求是全局函数
+	@desc 该方法只能调用无输入和输出参数的lua函数,并且可以调用table中的方法，能自适应输入的名称中
+	有 . 的方法，在调用时自动支持table的寻址方式
+	*/
 	bool executeFunction( const std::string & name );
+	
+	/**加载lua文件并执行
+	*/
+	bool executeFile( const std::string & fileName );
+		
 public:
 	//这方法帮助单元测试模块，用来监测各种调用之后是否有栈泄露
 	int getLuaStateTop();
 private:
 	bool checkFunction( const std::string & name );
+
+	bool processTable( std::vector<std::string> & stringVec , int top );
 private:
 	lua_State * m_state;
 };

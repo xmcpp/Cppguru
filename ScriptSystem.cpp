@@ -46,23 +46,8 @@ bool ScriptSystem::executeFunction( const std::string & name )
 
 	//表示有多于2个名称，调用到表中的函数
 	int top = lua_gettop( m_state );
-
-	lua_getglobal( m_state , nameVec[0].c_str() );
-	if( !lua_istable( m_state , -1 ) )
-	{
-		lua_pop(m_state,-1);
-		return false;
-	}
-
-	lua_getfield( m_state , -1 , nameVec[1].c_str() );	
-	if( !lua_isfunction( m_state , -1 ) )
-	{
-		lua_settop( m_state , top );
-		return false;
-	}
-
-	//弹出表对象
-	lua_remove( m_state , -2 );
+	
+	if( !processTable( nameVec , top ) ) return false;
 	
 	//调用,无入参，无出参
 	lua_call( m_state , 0 , 0 );
@@ -139,5 +124,40 @@ bool ScriptSystem::checkFunction( const std::string & name )
 	{
 		return false;
 	}
+	return true;
+}
+
+bool ScriptSystem::processTable( std::vector<std::string> & stringVec , int top )
+{
+	lua_getglobal( m_state , stringVec[0].c_str() );
+	if( !lua_istable( m_state , -1 ) )
+	{
+		lua_pop(m_state,-1);
+		return false;
+	}
+
+	int count = stringVec.size();
+	for ( int i = 1 ; i < count - 1 ; i++ )
+	{
+		lua_getfield( m_state , -1 , stringVec[i].c_str() );	
+		if( !lua_istable( m_state , -1 ) )
+		{
+			lua_settop( m_state , top );
+			return false;
+		}
+		//弹出表对象
+		lua_remove( m_state , -2 );
+	}
+
+	lua_getfield( m_state , -1 , stringVec[count-1].c_str() );	
+	if( !lua_isfunction( m_state , -1 ) )
+	{
+		lua_settop( m_state , top );
+		return false;
+	}
+
+	//弹出表对象
+	lua_remove( m_state , -2 );
+
 	return true;
 }
