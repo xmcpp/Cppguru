@@ -20,3 +20,12 @@ a = {};
 function a.b()
     value = true;
 end;
+
+--²âÊÔÇ¶Ì×±í
+c = {};
+
+function c.f()
+    value = true;
+end;
+
+z = { b = c };
