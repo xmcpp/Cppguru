@@ -39,4 +39,22 @@ TEST_F( ScriptTestSuite , ScriptCallFunctionWithBoolRet )
 	EXPECT_TRUE( oldTop == newTop );
 }
 
+/**测试是否可以调用表中的函数*/
+TEST_F( ScriptTestSuite , ScriptCallTableFunction )
+{
+	int oldTop = ScriptSystem::getSingleton().getLuaStateTop();
+
+	EXPECT_TRUE( ScriptSystem::getSingleton().executeFile( "test.lua" ) );
+	//调用表中的函数
+	EXPECT_TRUE( ScriptSystem::getSingleton().executeFunction( "a.b" ) );
+	
+	//确实函数是否正确执行
+	bool ret = false;
+	EXPECT_TRUE( ScriptSystem::getSingleton().executeGlobalFunction( "getBoolValue" , ret ) );
+	EXPECT_TRUE( ret );
+
+	int newTop = ScriptSystem::getSingleton().getLuaStateTop();
+	EXPECT_TRUE( oldTop == newTop );
+}
+
 #endif //__SCRIPTTESTSUITE_H__
