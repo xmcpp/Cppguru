@@ -260,6 +260,14 @@
 				RelativePath="..\StringConverter.h"
 				>
 			</File>
+			<File
+				RelativePath="..\StringTools.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\StringTools.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="App"
@@ -316,6 +324,14 @@
 			</File>
 			<File
 				RelativePath=".\ScriptTestSuite.h"
+				>
+			</File>
+			<File
+				RelativePath=".\StringTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StringTestSuite.h"
 				>
 			</File>
 			<File
