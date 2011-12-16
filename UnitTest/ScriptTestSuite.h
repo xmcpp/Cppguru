@@ -74,4 +74,18 @@ TEST_F( ScriptTestSuite , ScriptCallNestTableFunction )
 	int newTop = ScriptSystem::getSingleton().getLuaStateTop();
 	EXPECT_TRUE( oldTop == newTop );
 }
+
+/**测试是否可以调用c++中的对象*/
+TEST_F( ScriptTestSuite , CallCppObjectTest )
+{
+	int oldTop = ScriptSystem::getSingleton().getLuaStateTop();
+
+	EXPECT_TRUE( ScriptSystem::getSingleton().executeFile( "cpptest.lua" ) );
+	//调用表中的函数
+	EXPECT_TRUE( ScriptSystem::getSingleton().executeFunction( "setValue" ) );
+
+	int newTop = ScriptSystem::getSingleton().getLuaStateTop();
+	EXPECT_TRUE( oldTop == newTop );
+}
+
 #endif //__SCRIPTTESTSUITE_H__
