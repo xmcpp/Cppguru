@@ -6,8 +6,8 @@
 class ScriptMonitorObject : public PollMonitorObject
 {
 public:
-	ScriptMonitorObject();
-	virtual ~ScriptMonitorObject();
+	ScriptMonitorObject(){}
+	virtual ~ScriptMonitorObject(){}
 public:
 	virtual bool onCheck();
 	void setCheckFunctionName( const std::string & funName ){ m_funName = funName; }
