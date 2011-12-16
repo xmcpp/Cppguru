@@ -1,0 +1,12 @@
+$#include "PollMonitorObject.h"
+$#include "ScriptMonitorObject.h"
+
+class ScriptMonitorObject : public PollMonitorObject
+{
+public:
+	ScriptMonitorObject();
+	virtual ~ScriptMonitorObject();
+public:
+	void setCheckFunctionName( const std::string & funName ){ m_funName = funName; }
+
+};
