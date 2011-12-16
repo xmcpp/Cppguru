@@ -13,7 +13,7 @@ extern "C"
 template<> ScriptSystem* Singleton<ScriptSystem>::ms_Singleton	= 0;
 
 ScriptSystem::ScriptSystem()
-:m_state(NULL)
+:m_state(NULL),m_bEnable(false)
 {
 	m_state = lua_open();
 }
@@ -23,6 +23,23 @@ ScriptSystem::~ScriptSystem()
 	lua_close( m_state );
 }
 
+bool ScriptSystem::init()
+{
+	bool ret = onInit();
+	if ( ret )
+	{
+		m_bEnable = true;
+	}
+	return ret;
+}
+
+bool ScriptSystem::clear()
+{
+	bool ret = onClear();
+	m_bEnable = false;
+	return ret;
+}
+
 int ScriptSystem::getLuaStateTop()
 { 
 	return lua_gettop( m_state ); 
@@ -30,6 +47,8 @@ int ScriptSystem::getLuaStateTop()
 
 bool ScriptSystem::executeFunction( const std::string & name )
 {
+	if ( !m_bEnable ) return false;
+	
 	std::vector<std::string> nameVec;
 	StringTools::splitString( name , nameVec , '.' );
 
@@ -58,6 +77,8 @@ bool ScriptSystem::executeFunction( const std::string & name )
 
 bool ScriptSystem::executeGlobalFunction( const std::string & name )
 {
+	if ( !m_bEnable ) return false;
+
 	int top = lua_gettop( m_state );
 	
 	if (!checkFunction( name ) ) return false;
@@ -71,6 +92,8 @@ bool ScriptSystem::executeGlobalFunction( const std::string & name )
 
 bool ScriptSystem::executeGlobalFunction( const std::string & name , bool & ret )
 {
+	if ( !m_bEnable ) return false;
+
 	int top = lua_gettop( m_state );
 
 	if (!checkFunction( name ) ) 
@@ -99,6 +122,8 @@ bool ScriptSystem::executeGlobalFunction( const std::string & name , bool & ret 
 
 bool ScriptSystem::executeFile( const std::string & fileName )
 {
+	if ( !m_bEnable ) return false;
+
 	int top = lua_gettop( m_state );
 	
 	//加载脚本文件
