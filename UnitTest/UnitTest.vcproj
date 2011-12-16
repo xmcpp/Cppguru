@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtestd.lib lua514d.lib"
+				AdditionalDependencies="gtestd.lib lua514d.lib tolua++d.lib"
 				OutputFile="../bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug"
@@ -137,8 +137,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="gtest.lib lua514.lib tolua++.lib"
 				OutputFile="../bin/$(ProjectName).exe"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -245,6 +247,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ScriptMonitorObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ScriptMonitorObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ScriptSystem.cpp"
 				>
 			</File>
@@ -346,6 +356,18 @@
 		<Filter
 			Name="HelpClass"
 			>
+			<File
+				RelativePath=".\CppScriptSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CppScriptSystem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\lua_ScriptSystem.h"
+				>
+			</File>
 			<File
 				RelativePath=".\TestPollMonitorObject.cpp"
 				>
