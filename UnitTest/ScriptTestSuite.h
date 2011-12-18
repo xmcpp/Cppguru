@@ -1,7 +1,7 @@
 #ifndef __SCRIPTTESTSUITE_H__
 #define __SCRIPTTESTSUITE_H__
 
-#include "ScriptSystem.h"
+#include "CppScriptSystem.h"
 
 class ScriptTestSuite : public testing::Test
 {
@@ -78,13 +78,13 @@ TEST_F( ScriptTestSuite , ScriptCallNestTableFunction )
 /**测试是否可以调用c++中的对象*/
 TEST_F( ScriptTestSuite , CallCppObjectTest )
 {
-	int oldTop = ScriptSystem::getSingleton().getLuaStateTop();
+	int oldTop = CppScriptSystem::getSingleton().getLuaStateTop();
 
-	EXPECT_TRUE( ScriptSystem::getSingleton().executeFile( "cpptest.lua" ) );
+	EXPECT_TRUE( CppScriptSystem::getSingleton().executeFile( "cpptest.lua" ) );
 	//调用表中的函数
-	EXPECT_TRUE( ScriptSystem::getSingleton().executeFunction( "setValue" ) );
+	EXPECT_TRUE( CppScriptSystem::getSingleton().executeFunction( "setValue" ) );
 
-	int newTop = ScriptSystem::getSingleton().getLuaStateTop();
+	int newTop = CppScriptSystem::getSingleton().getLuaStateTop();
 	EXPECT_TRUE( oldTop == newTop );
 }
 
