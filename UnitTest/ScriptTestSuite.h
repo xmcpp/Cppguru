@@ -2,6 +2,7 @@
 #define __SCRIPTTESTSUITE_H__
 
 #include "CppScriptSystem.h"
+#include "MessageDispatcher.h"
 
 class ScriptTestSuite : public testing::Test
 {
@@ -85,8 +86,19 @@ TEST_F( ScriptTestSuite , CallCppObjectTest )
 	int oldTop = m_scriptObj->getLuaStateTop();
 
 	EXPECT_TRUE( m_scriptObj->executeFile( "cpptest.lua" ) );
-	//调用表中的函数
+	MessageDispatcher::getSingleton().Update(1.0f);
+	//此时应该没有激活
+	bool ret = false;
+	m_scriptObj->executeGlobalFunction( "checkAlarm" , ret );
+	EXPECT_FALSE( ret );
+
+	//调用表中的函数,设置激活条件为true
 	EXPECT_TRUE( m_scriptObj->executeFunction( "setValue" ) );
+	MessageDispatcher::getSingleton().Update(1.0f);
+	
+	//此时应该激活了
+	m_scriptObj->executeGlobalFunction( "checkAlarm" , ret );
+	EXPECT_TRUE( ret );
 
 	int newTop = m_scriptObj->getLuaStateTop();
 	EXPECT_TRUE( oldTop == newTop );

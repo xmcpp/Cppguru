@@ -1,6 +1,6 @@
 /*
 ** Lua binding: ScriptSystem
-** Generated automatically by tolua++-1.0.92 on 12/16/11 13:32:57.
+** Generated automatically by tolua++-1.0.92 on 12/20/11 20:39:38.
 */
 
 #ifndef __cplusplus
@@ -121,6 +121,75 @@ static int tolua_ScriptSystem_ScriptMonitorObject_delete00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: isAlarmed of class  ScriptMonitorObject */
+#ifndef TOLUA_DISABLE_tolua_ScriptSystem_ScriptMonitorObject_isAlarmed00
+static int tolua_ScriptSystem_ScriptMonitorObject_isAlarmed00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"ScriptMonitorObject",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  ScriptMonitorObject* self = (ScriptMonitorObject*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'isAlarmed'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->isAlarmed();
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'isAlarmed'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: enable of class  ScriptMonitorObject */
+#ifndef TOLUA_DISABLE_tolua_ScriptSystem_ScriptMonitorObject_enable00
+static int tolua_ScriptSystem_ScriptMonitorObject_enable00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"ScriptMonitorObject",0,&tolua_err) ||
+     !tolua_isboolean(tolua_S,2,0,&tolua_err) ||
+     !tolua_isboolean(tolua_S,3,1,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,1,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  ScriptMonitorObject* self = (ScriptMonitorObject*)  tolua_tousertype(tolua_S,1,0);
+  bool val = ((bool)  tolua_toboolean(tolua_S,2,0));
+  bool bDeferredStart = ((bool)  tolua_toboolean(tolua_S,3,false));
+  float deferredTime = ((float)  tolua_tonumber(tolua_S,4,1.0f));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'enable'", NULL);
+#endif
+  {
+   self->enable(val,bDeferredStart,deferredTime);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'enable'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: setCheckFunctionName of class  ScriptMonitorObject */
 #ifndef TOLUA_DISABLE_tolua_ScriptSystem_ScriptMonitorObject_setCheckFunctionName00
 static int tolua_ScriptSystem_ScriptMonitorObject_setCheckFunctionName00(lua_State* tolua_S)
@@ -172,6 +241,8 @@ TOLUA_API int tolua_ScriptSystem_open (lua_State* tolua_S)
    tolua_function(tolua_S,"new_local",tolua_ScriptSystem_ScriptMonitorObject_new00_local);
    tolua_function(tolua_S,".call",tolua_ScriptSystem_ScriptMonitorObject_new00_local);
    tolua_function(tolua_S,"delete",tolua_ScriptSystem_ScriptMonitorObject_delete00);
+   tolua_function(tolua_S,"isAlarmed",tolua_ScriptSystem_ScriptMonitorObject_isAlarmed00);
+   tolua_function(tolua_S,"enable",tolua_ScriptSystem_ScriptMonitorObject_enable00);
    tolua_function(tolua_S,"setCheckFunctionName",tolua_ScriptSystem_ScriptMonitorObject_setCheckFunctionName00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);

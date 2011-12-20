@@ -7,6 +7,8 @@ public:
 	ScriptMonitorObject();
 	virtual ~ScriptMonitorObject();
 public:
-	void setCheckFunctionName( const std::string & funName ){ m_funName = funName; }
+	bool isAlarmed();
+	void enable( bool val , bool bDeferredStart = false , float deferredTime = 1.0f );
+	void setCheckFunctionName( const std::string & funName );
 
 };
