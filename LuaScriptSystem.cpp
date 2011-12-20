@@ -126,7 +126,13 @@ bool LuaScriptSystem::executeFile( const std::string & fileName )
 	}
 
 	//调用,无入参，无出参
-	lua_call( m_state , 0 , 0 );
+	if( lua_pcall( m_state , 0 , 0 , 0 ) )
+	{
+		//可以进行错误信息获取
+		// std::string error = lua_tostring(m_state,-1);
+		
+	}
+
 
 	lua_settop( m_state , top );
 	return true;
