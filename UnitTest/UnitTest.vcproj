@@ -203,6 +203,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\LuaScriptSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\LuaScriptSystem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\MessageDispatcher.cpp"
 				>
 			</File>

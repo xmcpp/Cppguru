@@ -4,12 +4,22 @@
 
 void ScriptTestSuite::SetUpTestCase()
 {
-	new ScriptSystem();
-	ScriptSystem::getSingleton().init();
+	
 }
 
 void ScriptTestSuite::TearDownTestCase()
 {
-	ScriptSystem::getSingleton().clear();
-	delete ScriptSystem::getSingletonPtr();
+
+}
+
+void ScriptTestSuite::SetUp()
+{
+	m_scriptObj = new CppScriptSystem();
+	m_scriptObj->init();
+}
+
+void ScriptTestSuite::TearDown()
+{
+	m_scriptObj->clear();
+	delete m_scriptObj;
 }

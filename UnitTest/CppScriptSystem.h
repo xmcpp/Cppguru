@@ -1,9 +1,9 @@
 #ifndef __CPPSCRIPTSYSTEM_H__
 #define __CPPSCRIPTSYSTEM_H__
 
-#include "ScriptSystem.h"
+#include "LuaScriptSystem.h"
 
-class CppScriptSystem : public ScriptSystem
+class CppScriptSystem : public LuaScriptSystem
 {
 public:
 	bool onInit();

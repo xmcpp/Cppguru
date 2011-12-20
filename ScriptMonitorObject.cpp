@@ -5,7 +5,7 @@
 bool ScriptMonitorObject::onCheck()
 {
 	bool ret = false;
-	if( !ScriptSystem::getSingleton().executeGlobalFunction( m_funName , ret ) )
+	if( !ScriptSystemManager::getSingleton().getScriptSystem()->executeGlobalFunction( m_funName , ret ) )
 		return false;
 
 	return ret;

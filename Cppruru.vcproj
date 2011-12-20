@@ -407,6 +407,14 @@
 			Name="LuaScript"
 			>
 			<File
+				RelativePath=".\LuaScriptSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LuaScriptSystem.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ScriptSystem.cpp"
 				>
 			</File>
