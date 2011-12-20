@@ -44,7 +44,7 @@ public:
 	*/
 	virtual bool onCheck(){ return false; }
 
-	virtual void enable( bool val );
+	virtual void enable( bool val , bool bDeferredStart = false , float deferredTime = 1.0f );
 protected:
 	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
 protected:

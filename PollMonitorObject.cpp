@@ -12,9 +12,9 @@ bool PollMonitorObject::clear()
 	return true;
 }
 
-void PollMonitorObject::enable( bool val )
+void PollMonitorObject::enable( bool val , bool bDeferredStart , float deferredTime )
 {
-	IMonitorObject::enable(val);
+	IMonitorObject::enable(val , bDeferredStart , deferredTime );
 	
 	//«Âø’¿€º”÷µ
 	m_lastTime = 0.0f;
