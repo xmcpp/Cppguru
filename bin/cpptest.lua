@@ -2,9 +2,10 @@ local trigger = ScriptMonitorObject:new();
 local bCheckValue = false;
 
 trigger:enable(true);
-trigger:setCheckFunctionName( "checkFun" );
+trigger:setCheckFunctionName( "fun.checkFun" );
+fun = {};
 
-function checkFun()
+function fun.checkFun()
     return bCheckValue;
 end;
 
