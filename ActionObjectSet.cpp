@@ -1,6 +1,12 @@
 #include "pch.h"
 #include "ActionObjectSet.h"
 
+ActionObjectSet::ActionObjectSet( const std::string & name )
+:IActionObject( name )
+{
+
+}
+
 bool ActionObjectSet::init()
 {
 	m_actionSet.clear();

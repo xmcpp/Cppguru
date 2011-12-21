@@ -19,8 +19,8 @@ Update:
 class ActionObjectSet : public IActionObject
 {
 public:
-	ActionObjectSet();
-	virtual ~ActionObjectSet();
+	ActionObjectSet( const std::string & name );
+	virtual ~ActionObjectSet(){}
 public:
 	bool init();
 	bool excute();
