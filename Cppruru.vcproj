@@ -370,11 +370,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\ActionObjectManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ActionObjectManager.h"
+					>
+				</File>
+				<File
 					RelativePath=".\ActionObjectSet.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\ActionObjectSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ScriptActionObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ScriptActionObject.h"
 					>
 				</File>
 			</Filter>
