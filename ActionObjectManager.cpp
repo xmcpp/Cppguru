@@ -47,6 +47,7 @@ void ActionObjectManager::removeAll()
 {
 	for (mapItor it = m_actionObjectMap.begin() ; it != m_actionObjectMap.end() ; it++)
 	{
+		it->second->clear();
 		delete it->second;
 	}
 	m_actionObjectMap.clear();
