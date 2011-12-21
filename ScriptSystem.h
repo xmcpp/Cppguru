@@ -47,6 +47,10 @@ public:
 	/**执行脚本中函数,并不一定要求是全局函数
 	*/
 	virtual bool executeFunction( const std::string & name ){return true;}
+
+	/**执行脚本中函数,并返回bool类型
+	*/
+	virtual bool executeFunction( const std::string & name , bool & ret ){return true;}
 	
 	/**加载文件并执行
 	*/
