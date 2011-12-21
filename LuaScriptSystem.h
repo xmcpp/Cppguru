@@ -41,6 +41,8 @@ public:
 	*/
 	bool executeFunction( const std::string & name );
 	
+	bool executeFunction( const std::string & name , bool & ret );
+
 	/**加载lua文件并执行
 	*/
 	bool executeFile( const std::string & fileName );

@@ -68,6 +68,47 @@ bool LuaScriptSystem::executeFunction( const std::string & name )
 	return true;
 }
 
+bool LuaScriptSystem::executeFunction( const std::string & name , bool & ret )
+{
+	ret = false;
+
+	if ( !m_bEnable ) return false;
+
+	std::vector<std::string> nameVec;
+	StringTools::splitString( name , nameVec , '.' );
+
+	if ( nameVec.size() == 0 )
+	{
+		//表示无名称
+		return false;
+	}
+	else if ( nameVec.size() == 1 )
+	{
+		//表示调用全局函数
+		return executeGlobalFunction( name , ret );
+	}
+
+	//表示有多于2个名称，调用到表中的函数
+	int top = lua_gettop( m_state );
+
+	if( !processTable( nameVec , top ) ) return false;
+
+	//调用,无入参，无出参
+	lua_call( m_state , 0 , 1 );
+	
+	//检查返回值是否是bool
+	if ( !lua_isboolean( m_state , -1 ) )
+	{
+		lua_settop( m_state , top );
+		return false;
+	}
+
+	//转换为bool
+	ret = (lua_toboolean( m_state , -1 ) == 1)?true:false;
+	lua_settop( m_state , top );
+	return true;
+}
+
 bool LuaScriptSystem::executeGlobalFunction( const std::string & name )
 {
 	if ( !m_bEnable ) return false;
