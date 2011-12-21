@@ -4,9 +4,12 @@
 
 bool ScriptMonitorObject::onCheck()
 {
-	bool ret = false;
-	if( !ScriptSystemManager::getSingleton().getScriptSystem()->executeGlobalFunction( m_funName , ret ) )
-		return false;
+	bool result = false;
+	ScriptSystem * sys = ScriptSystemManager::getSingleton().getScriptSystem();
 
-	return ret;
+	if( !sys ) return false;
+
+	if( !sys->executeFunction( m_funName , result ) ) return false;
+
+	return result;
 }
