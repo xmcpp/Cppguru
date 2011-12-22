@@ -11,7 +11,7 @@ extern "C"
 };
 
 LuaScriptSystem::LuaScriptSystem()
-:m_state(NULL)
+:m_state(NULL),m_bReplaced(false)
 {
 	
 }
@@ -29,7 +29,9 @@ bool LuaScriptSystem::onInit()
 
 bool LuaScriptSystem::onClear()
 {
-	lua_close( m_state );
+	if ( !m_bReplaced )
+		lua_close( m_state );
+	
 	return true;
 }
 
@@ -225,4 +227,14 @@ bool LuaScriptSystem::processTable( std::vector<std::string> & stringVec , int t
 	lua_remove( m_state , -2 );
 
 	return true;
+}
+
+void LuaScriptSystem::replaceLuaState( lua_State * newState )
+{
+	if (m_bEnable && m_state )
+	{
+		onClear();
+	}
+	m_state = newState;
+	m_bReplaced = true;
 }

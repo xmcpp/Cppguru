@@ -9,6 +9,9 @@ Author: 徐淼
 Date: 2011.12.20
 
 Update: 
+	2011.12.22
+	增加了获得内部lua对象的方法。
+	增加了替代内部lua对象的方法。
 ***********************************************************************/
 
 #ifndef __LUASCRIPTSYSTEM_H__
@@ -50,9 +53,20 @@ public:
 public:
 	//这方法帮助单元测试模块，用来监测各种调用之后是否有栈泄露
 	int getLuaStateTop();
+
+	/**获得内部的lua 对象*/
+	lua_State * getLuaState(){ return m_state; }
+
+	/**替换内部的lua 对象
+	@desc 该方法可以将其它系统已经创建好的环境并进这个类来使用。
+	需要注意的是一旦调用本方法，原有的对象会被关闭。同时本类析构
+	的时候不会释放外部的lua对象
+	*/
+	void replaceLuaState( lua_State * newState );
 protected:
 	/**用于检查给定的名称是否是有效的全局函数*/
 	bool checkFunction( const std::string & name );
+
 	/**用于处理表中的函数展开，并将最后的函数置于栈顶
 	@param stringVec 被拆分的表名和函数名，层数不限
 	@param top 栈顶索引，用于处理给定名称无效时弹出栈内无效数据
@@ -61,6 +75,7 @@ protected:
 
 protected:
 	lua_State * m_state;
+	bool m_bReplaced;
 };
 
 
