@@ -26,7 +26,7 @@ Update:
 class EventMonitorObject : public IMonitorObject 
 {
 public:
-	EventMonitorObject();
+	EventMonitorObject( const std::string & name );
 	virtual ~EventMonitorObject(){}
 public:
 	virtual bool init();

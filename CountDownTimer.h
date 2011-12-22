@@ -1,0 +1,4 @@
+#ifndef __COUNTDOWNTIMER_H__
+#define __COUNTDOWNTIMER_H__
+
+#endif //__COUNTDOWNTIMER_H__

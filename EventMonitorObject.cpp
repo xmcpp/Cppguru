@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "EventMonitorObject.h"
 
-EventMonitorObject::EventMonitorObject()
-:m_monitorEventType(0)
+EventMonitorObject::EventMonitorObject( const std::string & name )
+:IMonitorObject(name),m_monitorEventType(0)
 {
 
 }

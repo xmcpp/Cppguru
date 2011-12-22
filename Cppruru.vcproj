@@ -398,6 +398,30 @@
 		<Filter
 			Name="Timer"
 			>
+			<File
+				RelativePath=".\CountDownTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CountDownTimer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SequenceTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SequenceTimer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerManager.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="OldVersionTrigger"

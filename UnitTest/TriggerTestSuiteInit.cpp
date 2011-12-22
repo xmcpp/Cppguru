@@ -67,7 +67,7 @@ void EventMonitorTest::SetUp()
 {
 	TriggerTestSuiteInit::SetUp();
 
-	m_eventObj = new EventMonitorObject();
+	m_eventObj = new EventMonitorObject("test");
 	m_eventObj->init();
 	
 }
