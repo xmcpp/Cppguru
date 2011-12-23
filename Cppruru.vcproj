@@ -422,6 +422,14 @@
 				RelativePath=".\TimerManager.h"
 				>
 			</File>
+			<File
+				RelativePath=".\TimerObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerObject.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="OldVersionTrigger"

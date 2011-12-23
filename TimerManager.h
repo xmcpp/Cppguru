@@ -2,26 +2,15 @@
 #define __TIMERMANAGER_H__
 
 #include "Singleton.h"
+#include <set>
+#include "TimerObject.h"
+#include "CountDownTimer.h"
+#include "SequenceTimer.h"
+#include "MessageDispatcher.h"
 
 class CountDownTimer;
 class SequenceTimer;
-
-class ITimer
-{
-public:
-	virtual void start();
-	virtual void pause();
-	virtual void stop();
-	virtual void resume();
-	virtual void reset();
-
-	void setName( const std::string & name ){ m_name = name; }
-	std::string & getName(){ return m_name; }
-protected:
-	std::string m_name;
-};
-
-class TimerManager : public Singleton<TimerManager>
+class TimerManager : public Singleton<TimerManager> , public IMessageReceiver
 {
 public:
 	TimerManager();
@@ -31,7 +20,13 @@ public:
 	SequenceTimer * createSequenceTimer( const std::string & name );
 	void destroyTimer( ITimer * timer );
 private:
+	bool hasTimer( const std::string & name );
+	void insertTimer( ITimer * timer );
+
+	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
+private:
 	std::map<std::string , ITimer*> m_timerMap;
+	typedef std::map<std::string , ITimer*>::iterator timerMapItor;
 };
 
 #endif //__TIMERMANAGER_H__
