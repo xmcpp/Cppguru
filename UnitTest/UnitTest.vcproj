@@ -286,6 +286,42 @@
 				RelativePath="..\StringTools.h"
 				>
 			</File>
+			<Filter
+				Name="Timer"
+				>
+				<File
+					RelativePath="..\CountDownTimer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\CountDownTimer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\SequenceTimer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\SequenceTimer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\TimerManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\TimerManager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\TimerObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\TimerObject.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="App"
@@ -353,6 +389,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TimerTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerTestSuite.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriggerTestSuiteInit.cpp"
 				>
 			</File>
@@ -382,6 +426,14 @@
 			</File>
 			<File
 				RelativePath=".\TestPollMonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerHelper.h"
 				>
 			</File>
 		</Filter>
