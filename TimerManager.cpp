@@ -12,13 +12,18 @@ TimerManager::TimerManager()
 TimerManager::~TimerManager()
 {
 	MessageDispatcher::getSingleton().removeListener( this );
+	
+	destroyAllTimer();
 }
 
 CountDownTimer * TimerManager::createCountDownTimer( const std::string & name )
 {
 	CountDownTimer * p = NULL;
 	if ( !hasTimer( name ))
+	{
 		p = new CountDownTimer( name );
+		m_timerMap.insert( std::make_pair( name , p ) );
+	}
 	
 	return p;
 }
@@ -27,7 +32,10 @@ SequenceTimer * TimerManager::createSequenceTimer( const std::string & name )
 {
 	SequenceTimer * p = NULL;
 	if ( !hasTimer( name ))
+	{
 		p = new SequenceTimer( name );
+		m_timerMap.insert( std::make_pair( name , p ) );
+	}
 
 	return p;
 }
@@ -41,6 +49,16 @@ void TimerManager::destroyTimer( ITimer * timer )
 		return ;
 
 	delete it->second;
+	m_timerMap.erase( it );
+}
+
+void TimerManager::destroyAllTimer()
+{
+	for ( timerMapItor it = m_timerMap.begin() ; it != m_timerMap.end() ; it++ )
+	{
+		delete it->second;
+	}
+	m_timerMap.clear();
 }
 
 void TimerManager::insertTimer( ITimer * timer )

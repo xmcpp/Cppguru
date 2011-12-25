@@ -39,3 +39,32 @@ void ITimer::timeFormat( unsigned long time , FormatTimeStruct & data )
 
 	data.m_millSeconds = time;
 }
+
+void ITimer::fireMessage( TimerMessage type )
+{
+
+	timerSetItor itor , endIt;
+	for( itor = m_timerSet.begin() , endIt = m_timerSet.end(); itor != endIt; itor++)
+	{
+		switch (type)
+		{
+		case TIMER_M_START:
+			(*itor)->onStart( this );
+			break;
+		case TIMER_M_STOP:
+			(*itor)->onStop( this );
+			break;
+		case TIMER_M_RESUME:
+			(*itor)->onResume( this );
+			break;
+		case TIMER_M_PAUSE:
+			(*itor)->onPause( this );
+			break;
+		case TIMER_M_UPDATE:
+			(*itor)->onSecond( this );
+			break;
+		}
+
+	}
+
+}

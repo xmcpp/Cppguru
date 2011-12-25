@@ -19,6 +19,7 @@ public:
 	CountDownTimer * createCountDownTimer( const std::string & name );
 	SequenceTimer * createSequenceTimer( const std::string & name );
 	void destroyTimer( ITimer * timer );
+	void destroyAllTimer();
 private:
 	bool hasTimer( const std::string & name );
 	void insertTimer( ITimer * timer );

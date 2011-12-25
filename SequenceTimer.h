@@ -21,7 +21,8 @@ public:
 private:
 	void resetTimerData();
 private:
-	long m_lastTime;
+	long m_lastTime; //记录计时器开始以后经历的时间
+	long m_secondTime; //记录时间流逝是否满足1秒钟
 };
 
 #endif //__SEQUENCETIMER_H__

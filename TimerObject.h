@@ -16,6 +16,8 @@ public:
 		unsigned int m_seconds;
 		unsigned int m_millSeconds;
 	};
+protected: 
+	enum TimerMessage { TIMER_M_START , TIMER_M_STOP , TIMER_M_RESUME , TIMER_M_PAUSE , TIMER_M_UPDATE };
 public:
 	virtual void start(){}
 	virtual void pause(){}
@@ -34,6 +36,7 @@ public:
 
 protected:
 	void timeFormat( unsigned long time , FormatTimeStruct & data );
+	void fireMessage( TimerMessage type );
 protected:
 	std::string m_name;
 	std::set< TimerListener * > m_timerSet;
@@ -51,6 +54,7 @@ public:
 	virtual void onStop( ITimer * timer ){}
 	virtual void onPause( ITimer * timer ){}
 	virtual void onResume( ITimer * timer ){}
+	virtual void onSecond( ITimer * timer ){}
 };
 
 #endif //__TIMEROBJECT_H__
