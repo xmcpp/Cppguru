@@ -9,27 +9,40 @@ SequenceTimer::SequenceTimer( const std::string & name )
 
 void SequenceTimer::start()
 {
-	resetTimerData();
-	m_timerState = TIMER_RUNNING;
-	fireMessage(TIMER_M_START);
+	if( m_timerState == TIMER_STOP )
+	{
+		resetTimerData();
+		m_timerState = TIMER_RUNNING;
+		fireMessage(TIMER_M_START);
+	}	
 }
 
 void SequenceTimer::pause()
 {
-	m_timerState = TIMER_PAUSE;
-	fireMessage(TIMER_M_PAUSE);
+	if ( m_timerState == TIMER_RUNNING )
+	{
+		m_timerState = TIMER_PAUSE;
+		fireMessage(TIMER_M_PAUSE);
+	}
+	
 }
 
 void SequenceTimer::stop()
 {
-	m_timerState = TIMER_STOP;
-	fireMessage(TIMER_M_STOP);
+	if ( m_timerState == TIMER_RUNNING || m_timerState == TIMER_PAUSE )
+	{
+		m_timerState = TIMER_STOP;
+		fireMessage(TIMER_M_STOP);
+	}
 }
 
 void SequenceTimer::resume()
 {
-	m_timerState = TIMER_RUNNING;
-	fireMessage(TIMER_M_RESUME);
+	if ( m_timerState == TIMER_PAUSE )
+	{
+		m_timerState = TIMER_RUNNING;
+		fireMessage(TIMER_M_RESUME);
+	}
 }
 
 void SequenceTimer::reset()
@@ -47,7 +60,7 @@ void SequenceTimer::update( float time )
 		if ( m_secondTime >= 1000 )
 		{
 			fireMessage(TIMER_M_UPDATE);
-			m_secondTime = 0;
+			m_secondTime -= 1000;
 		}
 	}
 }
