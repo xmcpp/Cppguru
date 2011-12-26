@@ -471,6 +471,14 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Thread"
+			>
+		</Filter>
+		<Filter
+			Name="AStar"
+			>
+		</Filter>
 		<File
 			RelativePath=".\readme.txt"
 			>

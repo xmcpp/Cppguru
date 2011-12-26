@@ -59,15 +59,19 @@ void CountDownTimer::update( float time )
 		if ( m_countDownTime - m_lastTime <= 0 )
 		{
 			//倒计时完成
+			fireMessage(TIMER_M_UPDATE); //先发送每秒更新函数，帮助界面更新再发送结束事件
 			fireMessage( TIMER_M_STOP );
+			m_timerState = TIMER_STOP;
 			return;
 		}
+
 		m_secondTime += t;
 		if ( m_secondTime >= 1000 )
 		{
 			fireMessage(TIMER_M_UPDATE);
 			m_secondTime -= 1000;
 		}
+		
 	}
 }
 
