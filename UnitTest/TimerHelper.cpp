@@ -3,7 +3,7 @@
 
 TimerHelper::TimerHelper()
 {
-	
+	reset();
 }
 
 TimerHelper::~TimerHelper()
