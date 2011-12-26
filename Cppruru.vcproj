@@ -474,6 +474,14 @@
 		<Filter
 			Name="Thread"
 			>
+			<File
+				RelativePath=".\Threadbase.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Threadbase.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="AStar"
