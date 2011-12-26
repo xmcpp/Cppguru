@@ -168,4 +168,81 @@ TEST_F( TimerTestFixture , SequenceTimerTest )
 	timer->removeListener(&help);
 }
 
+TEST_F( TimerTestFixture , CountDownTimerTest )
+{
+	CountDownTimer * timer = TimerManager::getSingleton().createCountDownTimer( "a" );
+	ASSERT_TRUE(  timer!= NULL );
+	timer->setCountDownTime( 3500 );
+	TimerHelper help;
+	timer->addListener(&help);
+	timer->start();
+	
+	ParameterSet param;
+	ITimer::FormatTimeStruct data;
+
+	timer->getFormatTime(data);
+	EXPECT_EQ( 3 , data.m_seconds );
+	EXPECT_EQ( 500 , data.m_milliSeconds );
+	
+	//倒计时0.8秒
+	param.SetValue("interval","0.8"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.8秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 2 , data.m_seconds );
+	EXPECT_EQ( 700 , data.m_milliSeconds );
+	EXPECT_FALSE( help.m_hasSecondEvent );
+	
+	//倒计时0.4秒，检测每秒事件是否发生
+	param.SetValue("interval","0.4"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.4秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 2 , data.m_seconds );
+	EXPECT_EQ( 300 , data.m_milliSeconds );
+	EXPECT_TRUE( help.m_hasSecondEvent );
+	help.m_hasSecondEvent = false;
+	
+	//倒计时0.8秒，检测第二次每秒事件是否发生
+	param.SetValue("interval","0.8"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.8秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 1 , data.m_seconds );
+	EXPECT_EQ( 500 , data.m_milliSeconds );
+	EXPECT_TRUE( help.m_hasSecondEvent );
+	help.reset();
+	
+	//测试暂停效果
+	timer->pause();
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过0.8秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 1 , data.m_seconds );
+	EXPECT_EQ( 500 , data.m_milliSeconds );
+	
+	//测试超过总时间的倒计时，检测是否停止
+	timer->resume();
+
+	param.SetValue("interval","1.6"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过1.6秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 0 , data.m_seconds );
+	EXPECT_EQ( 0 , data.m_milliSeconds );
+	EXPECT_TRUE( help.m_hasSecondEvent );
+	EXPECT_TRUE( help.m_hasStopEvent );
+	help.reset();
+
+	//测试stop方法不会影响已有的数据
+	timer->start();
+	param.SetValue("interval","1.6"); 
+	MessageDispatcher::getSingleton().SendMessage( MD_TIME_FRAMETICK , param );//发送经过1.6秒的事件
+	timer->getFormatTime(data);
+	EXPECT_EQ( 1 , data.m_seconds );
+	EXPECT_EQ( 900 , data.m_milliSeconds );
+	timer->stop();
+	timer->getFormatTime(data);
+	EXPECT_EQ( 1 , data.m_seconds );
+	EXPECT_EQ( 900 , data.m_milliSeconds );
+
+
+	timer->removeListener(&help);
+}
+
 #endif //__TIMERTESTSUITE_H__
