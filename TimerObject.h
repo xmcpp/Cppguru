@@ -14,7 +14,7 @@ public:
 		unsigned int m_hours;
 		unsigned int m_minutes;
 		unsigned int m_seconds;
-		unsigned int m_millSeconds;
+		unsigned int m_milliSeconds;
 	};
 protected: 
 	enum TimerMessage { TIMER_M_START , TIMER_M_STOP , TIMER_M_RESUME , TIMER_M_PAUSE , TIMER_M_UPDATE };

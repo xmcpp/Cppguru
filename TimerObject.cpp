@@ -37,7 +37,7 @@ void ITimer::timeFormat( unsigned long time , FormatTimeStruct & data )
 	data.m_seconds = time / 1000;
 	time = time - ( data.m_seconds * 1000 );
 
-	data.m_millSeconds = time;
+	data.m_milliSeconds = time;
 }
 
 void ITimer::fireMessage( TimerMessage type )
