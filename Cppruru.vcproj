@@ -486,6 +486,14 @@
 		<Filter
 			Name="AStar"
 			>
+			<File
+				RelativePath=".\AStar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AStar.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\readme.txt"
