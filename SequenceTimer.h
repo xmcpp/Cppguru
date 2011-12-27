@@ -1,3 +1,15 @@
+/**********************************************************************
+顺序定时器
+
+Desc:顺序定时器提供了从0开始计时的功能。通过设置监听者接口，可以
+监听各个定时器事件，并且可以通过方法获得当前已经流逝了多少时间。
+
+Author: 徐淼
+
+Date: 2011.12.22
+
+Update: 
+***********************************************************************/
 #ifndef __SEQUENCETIMER_H__
 #define __SEQUENCETIMER_H__
 
@@ -16,8 +28,11 @@ public:
 	virtual void reset();
 	virtual void update( float time );
 public:
+	/**获得当前流逝的时间总数*/
 	long getTimeTick(){ return m_lastTime;}
-	void getFormatTime( FormatTimeStruct & time ); 
+
+	/**获取当前格式化以后的流逝时间总数*/
+	void getFormatTime( FormatTimeStruct & time );
 private:
 	void resetTimerData();
 private:
