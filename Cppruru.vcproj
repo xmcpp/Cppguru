@@ -294,6 +294,42 @@
 		<Filter
 			Name="Xml"
 			>
+			<Filter
+				Name="tinyxml"
+				>
+				<File
+					RelativePath=".\xml\tinyxml\tinystr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\xml\tinyxml\tinystr.h"
+					>
+				</File>
+				<File
+					RelativePath=".\xml\tinyxml\tinyxml.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\xml\tinyxml\tinyxml.h"
+					>
+				</File>
+				<File
+					RelativePath=".\xml\tinyxml\tinyxmlerror.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\xml\tinyxml\tinyxmlparser.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="rapidxml"
+				>
+				<File
+					RelativePath=".\xml\rapidxml\rapidxml.hpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Trigger"
