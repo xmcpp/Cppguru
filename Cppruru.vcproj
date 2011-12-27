@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../3rdlib/include/lua"
+				AdditionalIncludeDirectories="../3rdlib/include/lua;../3rdlib/include/sqlite"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,10 +62,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua514d.lib"
+				AdditionalDependencies="lua514d.lib sqlite379.lib"
 				OutputFile="./bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug"
+				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug;../3rdlib/lib/sqlite/release"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -119,6 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../3rdlib/include/lua;../3rdlib/include/sqlite"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -137,10 +138,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua514.lib"
+				AdditionalDependencies="lua514.lib sqlite379.lib"
 				OutputFile="./bin/$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="../3rdlib/lib/lua/release"
+				AdditionalLibraryDirectories="../3rdlib/lib/lua/release;../3rdlib/lib/sqlite/release"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -238,12 +239,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="资源文件"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<Filter
 			Name="StateMachine"
 			>
 			<File
@@ -288,8 +283,40 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="SqlLite"
+			Name="Sqlite"
 			>
+			<File
+				RelativePath=".\CppSQLite3.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\CppSQLite3.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LocalDataBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LocalDataBase.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Xml"
@@ -300,6 +327,14 @@
 				<File
 					RelativePath=".\xml\tinyxml\tinystr.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\xml\tinyxml\tinystr.h"
@@ -308,6 +343,14 @@
 				<File
 					RelativePath=".\xml\tinyxml\tinyxml.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\xml\tinyxml\tinyxml.h"
@@ -316,10 +359,26 @@
 				<File
 					RelativePath=".\xml\tinyxml\tinyxmlerror.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\xml\tinyxml\tinyxmlparser.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 			<Filter
