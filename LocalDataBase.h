@@ -52,8 +52,6 @@ public:
 	*/
 	bool createTable(const std::string& tableName,const std::string& tableDes);
 
-
-
    /**执行一个查询动作
    *@param sql 查询语名
    *@param 返回query 查询结果
@@ -61,15 +59,12 @@ public:
    */
 	bool Query(const std::string& sql,CppSQLite3Query& qury);
 
-
 	/**执行sql 语名
 	*@param sql sql语句
 	*@return 更新的行数 -1表示没有执行成功
 	*/
 	int  exeSQL(const std::string& sql);
 	
-
-
 	/**
 	*开始处理事务，为提高速度批量的数据操作需要写在beginTransaction和endTransaction之间
 	*所有在begin end 之间的exeSQL会一次提次、做为一个原子操作
