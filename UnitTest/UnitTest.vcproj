@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\;..\..\3rdLib\include\lua"
+				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\;..\..\3rdLib\include\lua;..\..\3rdLib\include\vld"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,10 +62,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtestd.lib lua514d.lib tolua++d.lib"
+				AdditionalDependencies="gtestd.lib lua514d.lib tolua++d.lib vld.lib"
 				OutputFile="../bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug;../../3rdlib/lib/vld/release"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
