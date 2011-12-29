@@ -9,6 +9,8 @@ Author: 徐淼
 Date: 2011.12.21
 
 Update: 
+2011.12.29
+使其不成为单件,由TriggerManager统一管理
 ***********************************************************************/
 #ifndef __ACTIONOBJECTMANAGER_H__
 #define __ACTIONOBJECTMANAGER_H__
@@ -16,7 +18,7 @@ Update:
 #include "Singleton.h"
 
 class IActionObject;
-class ActionObjectManager : public Singleton<ActionObjectManager>
+class ActionObjectManager
 {
 public:
 	ActionObjectManager();

@@ -21,7 +21,7 @@ class IMonitorObject;
 class TriggerObject : IMonitorEventListener
 {
 public:
-	TriggerObject();
+	TriggerObject( const std::string & name );
 	virtual ~TriggerObject(){}
 public:
 	/**…Ë÷√Monitor∂‘œÛ
@@ -62,6 +62,7 @@ protected:
 	virtual void onAlarmActive();
 	virtual void onSilenceActive();
 private:
+	std::string m_name;
 	bool m_isEnable;
 	IMonitorObject * m_monitorObject;
 	IActionObject * m_activeActionObject;

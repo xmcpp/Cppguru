@@ -15,28 +15,28 @@ Update:
 #ifndef __POLLMONITORMANAGER_H__
 #define __POLLMONITORMANAGER_H__
 
-#include "MessageDispatcher.h"
-#include "EventMonitorObject.h"
+#include "MapManager.h"
+#include "Singleton.h"
+class TriggerObject;
+class ActionObjectManager;
 
-class PollMonitorObject;
-
-class PollMonitorManager : public Singleton<PollMonitorManager> , public IMessageReceiver
+class TriggerManager : public Singleton<TriggerManager> , public MapManager<TriggerManager>
 {
 public:
-	PollMonitorManager();
-	virtual ~PollMonitorManager();
+	TriggerManager();
+	virtual ~TriggerManager();
 public:
-	/**管理需要轮询的监控器对象*/
-	void addPollMonitor( PollMonitorObject * object );
-	void removePollMonitor( PollMonitorObject * object );
-	void clearAllPollMonitor();
-protected:
-	void update( float time );
-	virtual void ReceiveMessage(unsigned int messageType , ParameterSet& messageParam);
+	void initTriggerSystem();
+	void uninitTriggerSystem();
+	
+	TriggerObject * createTrigger( const std::string & name );
+	TriggerObject * getTrigger( const std::string & name );
+	void destroyTrigger( const std::string & name );
+	
+	ActionObjectManager * getActionObjectManager(){ return m_actObjMgr; }
 
 private:
-	std::set<PollMonitorObject*> m_set;
-	typedef std::set<PollMonitorObject*>::iterator setItor;
+	ActionObjectManager * m_actObjMgr;
 };
 
 #endif //__POLLMONITORMANAGER_H__

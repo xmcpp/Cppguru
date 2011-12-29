@@ -2,8 +2,9 @@
 #include "TriggerObject.h"
 #include "ActionObject.h"
 
-TriggerObject::TriggerObject()
-:m_isEnable(false),m_monitorObject(NULL),m_activeActionObject(NULL),m_deactiveActionObject(NULL)
+TriggerObject::TriggerObject( const std::string & name )
+:m_isEnable(false),m_monitorObject(NULL),m_activeActionObject(NULL),m_deactiveActionObject(NULL),
+m_name(name)
 {
 
 }
