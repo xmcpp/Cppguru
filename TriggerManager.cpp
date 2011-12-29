@@ -1,132 +1,59 @@
 #include "pch.h"
-#include "TriggerManager.h" 
+#include "TriggerManager.h"
+#include "PollMonitorObject.h"
+#include "StringConverter.h"
 
-template<> TriggerManager* Singleton<TriggerManager>::ms_Singleton	= 0;
+template<> PollMonitorManager* Singleton<PollMonitorManager>::ms_Singleton	= 0;
 
-TriggerManager::TriggerManager(void)
-:mTimeSinceLastFrame(0)
+PollMonitorManager::PollMonitorManager()
 {
-	MessageDispatcher::getSingleton().addListener(this);
+	MessageDispatcher::getSingleton().addListener( this );
 }
 
-TriggerManager::~TriggerManager(void)
+PollMonitorManager::~PollMonitorManager()
 {
-	MessageDispatcher::getSingleton().removeListener(this);
+	MessageDispatcher::getSingleton().removeListener( this );
 }
 
-Trigger* TriggerManager::CreateTrigger(const std::string& name)
+void PollMonitorManager::addPollMonitor( PollMonitorObject * object )
 {
-	return Create(name , new Trigger(name));
+	if (!object) return;
+
+	m_set.insert( object );
 }
 
-Trigger* TriggerManager::GetTrigger(const std::string& name)
+void PollMonitorManager::removePollMonitor( PollMonitorObject * object )
 {
-	return Get(name);
-}
+	if (!object) return;
 
-bool TriggerManager::DestroyTrigger(const std::string& name)
-{
-	return Destory(name);
-}
-
-void TriggerManager::DestroyAllTrigger()
-{
-	DestoryAll();
-}
-
-bool TriggerManager::HasTrigger(const std::string& name)
-{
-	return Has(name);
-}
-
-bool TriggerManager::EnableTrigger(const std::string& name)
-{
-	Trigger* pTrigger = GetTrigger(name);
-	if (pTrigger)
+	setItor it = m_set.find( object );
+	if ( it != m_set.end() )
 	{
-		pTrigger->Enable(true);
-		return true;
-	}
-
-	return false;
-}
-
-bool TriggerManager::DisableTrigger(const std::string& name)
-{
-	Trigger* pTrigger = GetTrigger(name);
-	if (pTrigger)
-	{
-		pTrigger->Enable(false);
-		return true;
-	}
-
-	return false;
-}
-
-bool TriggerManager::ExecuteTrigger(const std::string& name)
-{
-	Trigger* pTrigger = GetTrigger(name);
-	if (pTrigger)
-	{
-		pTrigger->Execute(false);
-		return true;
-	}
-
-	return false;
-}
-
-bool TriggerManager::ConditionalExecuteTrigger(const std::string& name)
-{
-	Trigger* pTrigger = GetTrigger(name);
-	if (pTrigger)
-	{
-		pTrigger->Execute();
-		return true;
-	}
-
-	return false;
-}
-
-void TriggerManager::ReceiveMessage(unsigned int messageType , const ParameterSet& messageParam)
-{
-	ObjectIterator itr = BeginObjectIterator();
-	while (itr!=EndObjectIterator())
-	{
-		Trigger* pTrigger = itr->second;
-		if (pTrigger->IsEnable())
-		{
-			if (pTrigger->IsEnableMessageDriver())
-			{
-				pTrigger->ReceiveMessage(messageType , messageParam);
-			}
-		}
-
-		itr++;
-	}
-
-}
-
-void TriggerManager::Update(float timeSinceLastFrame)
-{
-	mTimeSinceLastFrame = timeSinceLastFrame;
-
-	ObjectIterator itr = BeginObjectIterator();
-	while (itr!=EndObjectIterator())
-	{
-		Trigger* pTrigger = itr->second;
-		if (pTrigger->IsEnable())
-		{
-			if (pTrigger->IsEnableUpdateDriver())
-			{
-				pTrigger->Update(timeSinceLastFrame);
-			}
-		}
-
-		itr++;
+		m_set.erase( it );
 	}
 }
 
-float TriggerManager::GetTimeSinceLastFrame()
+void PollMonitorManager::clearAllPollMonitor()
 {
-	return mTimeSinceLastFrame;
+	m_set.clear();
+}
+
+void PollMonitorManager::update( float time )
+{
+	for ( setItor it = m_set.begin() ; it != m_set.end() ; it++ )
+	{
+		//(*it)->update( time );
+	}
+}
+
+void PollMonitorManager::ReceiveMessage(unsigned int messageType , ParameterSet& messageParam)
+{
+	if( messageType == MD_TIME_FRAMETICK )
+	{
+		//表示每帧的事件
+		float val = StringConverter::parseFloat( messageParam.GetValue( "interval" ) );
+		
+		//获取帧间隔以后调用更新
+		update( val );
+	}
 }

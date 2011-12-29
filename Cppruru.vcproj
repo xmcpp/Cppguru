@@ -394,6 +394,14 @@
 			Name="Trigger"
 			>
 			<File
+				RelativePath=".\TriggerManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TriggerManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriggerObject.cpp"
 				>
 			</File>
@@ -426,14 +434,6 @@
 				</File>
 				<File
 					RelativePath=".\MonitorObjectSet.h"
-					>
-				</File>
-				<File
-					RelativePath=".\PollMonitorManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\PollMonitorManager.h"
 					>
 				</File>
 				<File
@@ -523,26 +523,6 @@
 			</File>
 			<File
 				RelativePath=".\TimerObject.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="OldVersionTrigger"
-			>
-			<File
-				RelativePath=".\Trigger.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Trigger.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TriggerManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TriggerManager.h"
 				>
 			</File>
 		</Filter>
