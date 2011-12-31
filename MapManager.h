@@ -32,13 +32,21 @@ public:
 	{
 		
 	}
-
-	void addObject( const std::string& name , Tptr object )
+	
+	/**添加对象
+	@param name 对象名称
+	@param object 对象指针
+	@return 返回添加的对象指针,如果对象已经存在，返回null
+			添加返回信息方便使用者可以嵌套调用这个方法
+			比如 return addObject("aa" , new p() );
+	*/
+	Tptr addObject( const std::string& name , Tptr object )
 	{
 		ObjectIterator it = m_ObjectMap.find(name);
-		if( it != m_ObjectMap.end() ) return;
+		if( it != m_ObjectMap.end() ) return NULL;
 		
-		m_ObjectMap.insert(std::make_pair(name,p));
+		m_ObjectMap.insert(std::make_pair(name,object));
+		return object;
 	}
 
 

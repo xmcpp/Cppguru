@@ -1,8 +1,7 @@
 /**********************************************************************
 动作对象管理器
 
-Desc:动作对象管理器管理已经创建的所有动作对象,它不负责创建,但在清除
-时负责删除所有动作对象.
+Desc:动作对象管理器管理已经创建的所有动作对象，不负责创建但可以负责删除
 
 Author: 徐淼
 
@@ -15,24 +14,20 @@ Update:
 #ifndef __ACTIONOBJECTMANAGER_H__
 #define __ACTIONOBJECTMANAGER_H__
 
-#include "Singleton.h"
+#include "MapManager.h"
 
 class IActionObject;
-class ActionObjectManager
+class ActionObjectManager : public MapManager<IActionObject>
 {
 public:
-	ActionObjectManager();
-	~ActionObjectManager();
-
+	ActionObjectManager(){}
+	~ActionObjectManager(){}
 public:
 	bool addActionObject( IActionObject * object );
 	IActionObject * getActionObject( const std::string & name );
-	bool removeActionObject( IActionObject * object );
-	bool removeActionObject( const std::string & name );
-	void removeAll();
-private:
-	std::map<std::string , IActionObject*>  m_actionObjectMap;
-	typedef std::map<std::string , IActionObject*>::iterator mapItor;
+	bool removeActionObject( IActionObject * object , bool bDestory = false );
+	bool removeActionObject( const std::string & name , bool bDestory = false );
+	void removeAllActionObject( bool bDestory = false );
 };
 
 #endif //__ACTIONOBJECTMANAGER_H__

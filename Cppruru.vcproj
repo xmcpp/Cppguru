@@ -429,6 +429,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\MonitorObjectManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MonitorObjectManager.h"
+					>
+				</File>
+				<File
 					RelativePath=".\MonitorObjectSet.cpp"
 					>
 				</File>

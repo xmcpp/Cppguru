@@ -1,13 +1,11 @@
 /**********************************************************************
-轮询监控对象管理器
+触发器对象管理器
 
-Desc:管理轮询对象，单件对象.内部处理所有信息，使用时不需要额外调用方法。
-	 利用消息实现轮询，内部接收消息对象发送的MD_TIME_FRAMETICK
-	 事件，该事件每帧发送一个，所以接收该事件来推动轮询操作。
+Desc:
 
 Author: 徐淼
 
-Date: 2011.12.2
+Date: 2011.12.31
 
 Update: 
 ***********************************************************************/
@@ -17,10 +15,12 @@ Update:
 
 #include "MapManager.h"
 #include "Singleton.h"
-class TriggerObject;
-class ActionObjectManager;
+#include "TriggerObject.h"
+#include "MonitorObjectManager.h"
+#include "ActionObjectManager.h"
 
-class TriggerManager : public Singleton<TriggerManager> , public MapManager<TriggerManager>
+
+class TriggerManager : public Singleton<TriggerManager> , public MapManager<TriggerObject>
 {
 public:
 	TriggerManager();
@@ -31,12 +31,14 @@ public:
 	
 	TriggerObject * createTrigger( const std::string & name );
 	TriggerObject * getTrigger( const std::string & name );
-	void destroyTrigger( const std::string & name );
+	bool destroyTrigger( const std::string & name );
 	
 	ActionObjectManager * getActionObjectManager(){ return m_actObjMgr; }
-
+	MonitorObjectManager * getMonitorObjectManager(){ return m_monitorObjMgr; }
 private:
 	ActionObjectManager * m_actObjMgr;
+	MonitorObjectManager * m_monitorObjMgr;
+	bool m_bInit;
 };
 
 #endif //__POLLMONITORMANAGER_H__
