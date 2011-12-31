@@ -187,6 +187,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ActionObjectManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\ActionObjectManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ActionObjectSet.cpp"
 				>
 			</File>
@@ -228,6 +236,14 @@
 			</File>
 			<File
 				RelativePath="..\MonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObjectManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MonitorObjectManager.h"
 				>
 			</File>
 			<File
@@ -284,6 +300,22 @@
 			</File>
 			<File
 				RelativePath="..\StringTools.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TriggerManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\TriggerManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TriggerObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\TriggerObject.h"
 				>
 			</File>
 			<Filter
@@ -397,6 +429,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TriggerManagerTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TriggerManagerTestSuite.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TriggerTestSuiteInit.cpp"
 				>
 			</File>
@@ -418,6 +458,14 @@
 			</File>
 			<File
 				RelativePath=".\lua_ScriptSystem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestActionObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestActionObject.h"
 				>
 			</File>
 			<File

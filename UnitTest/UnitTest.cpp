@@ -2,7 +2,7 @@
 //
 
 #include "pch.h"
-#include "vld.h"
+//#include "vld.h"
 #include "GlobalInit.h"
 
 int _tmain(int argc, _TCHAR* argv[])
