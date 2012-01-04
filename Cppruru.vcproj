@@ -254,6 +254,14 @@
 			Name="Base"
 			>
 			<File
+				RelativePath=".\IniFileManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IniFileManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ListenerManager.h"
 				>
 			</File>
@@ -577,6 +585,10 @@
 				RelativePath=".\AStar.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Math"
+			>
 		</Filter>
 		<File
 			RelativePath=".\readme.txt"
