@@ -22,13 +22,21 @@ public:
 	void getKeyName( const std::string & sectionName , std::vector<std::string> & nameVec );
 	std::string getValue( const std::string & sectionName , const std::string & keyName );
 	bool setValue( const std::string & sectionName , const std::string & keyName , const std::string & value );
-	
+	bool saveIniFile();
+	bool closeIniFile();
 
+private:
+	bool isSectionName( const std::string & str );
+	void parseSectionName( const std::string & str , std::string & sectionName );
+	bool isKeyValue( const std::string & str );
+	void parseKeyValue( const std::string & str , std::string & keyName , std::string & value );
 private:
 	std::map<std::string , std::string> m_keyValueMap;
 	typedef std::map<std::string , std::string>::iterator keyMapItor;
 	std::map<std::string , std::map<std::string , std::string> > m_sectionMap;
 	typedef std::map<std::string , std::map<std::string , std::string> >::iterator sectionMapItor;
+
+	std::string m_fileName;
 };
 
 #endif //__INIFILEMANAGER_H__
