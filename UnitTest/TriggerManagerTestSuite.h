@@ -2,7 +2,7 @@
 #define __TRIGGERMANAGERTESTSUITE_H__
 
 #include "TriggerManager.h"
-
+#include "TestActionObject.h"
 class TriggerManagerTestSuite : public testing::Test
 {
 public:
@@ -38,8 +38,18 @@ TEST_F( TriggerManagerTestSuite , TestTriggerFunction2 )
 
 	IMonitorObject * monitorObj = monitorMgr->getMonitorObject( "MonitorObject" );
 	ASSERT_TRUE( monitorObj != NULL );
-
 	
+	p->setMonitorObject( monitorObj );
+	p->setActiveActionObject( actionObj );
+	monitorObj->enable( true );
+	p->enable( true );
+	
+	monitorObj->trigger();
+
+	TestActionObject * pTestActionObject = dynamic_cast<TestActionObject*>(actionObj);
+	ASSERT_TRUE( pTestActionObject != NULL );
+	
+	EXPECT_TRUE( pTestActionObject->getTestState() );
 
 }
 

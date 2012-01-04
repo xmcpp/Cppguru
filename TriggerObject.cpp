@@ -18,7 +18,9 @@ void TriggerObject::setMonitorObject( IMonitorObject * object )
 	}
 	
 	m_monitorObject = object;
-	m_monitorObject->addListener( this );
+	
+	if( m_monitorObject )
+		m_monitorObject->addListener( this );
 }
 
 void TriggerObject::setActiveActionObject( IActionObject * object )
@@ -31,7 +33,7 @@ void TriggerObject::setDeactiveActionObject( IActionObject * object )
 	m_deactiveActionObject = object;
 }
 
-void TriggerObject::onAlarmActive()
+void TriggerObject::onAlarmActive( IMonitorObject * object )
 {
 	if ( m_isEnable && m_activeActionObject )
 	{
@@ -39,7 +41,7 @@ void TriggerObject::onAlarmActive()
 	}
 }
 
-void TriggerObject::onSilenceActive()
+void TriggerObject::onSilenceActive( IMonitorObject * object )
 {
 	if ( m_isEnable && m_deactiveActionObject )
 	{
@@ -52,7 +54,7 @@ void TriggerObject::trigger()
 	if ( !m_isEnable ) { return; }
 	
 	//手动触发
-	onAlarmActive();
+	onAlarmActive( NULL );
 }
 
 void TriggerObject::unTrigger()
@@ -60,5 +62,5 @@ void TriggerObject::unTrigger()
 	if ( !m_isEnable ) { return; }
 	
 	//手动触发
-	onSilenceActive();
+	onSilenceActive( NULL );
 }

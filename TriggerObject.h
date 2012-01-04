@@ -59,8 +59,8 @@ public:
 	bool isEnable() { return m_isEnable; }
 	
 protected:
-	virtual void onAlarmActive();
-	virtual void onSilenceActive();
+	virtual void onAlarmActive( IMonitorObject * object );
+	virtual void onSilenceActive( IMonitorObject * object );
 private:
 	std::string m_name;
 	bool m_isEnable;
