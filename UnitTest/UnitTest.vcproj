@@ -211,6 +211,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IniFileManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\IniFileManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\LuaScriptSystem.cpp"
 				>
 			</File>
@@ -404,6 +412,14 @@
 		<Filter
 			Name="TestSuite"
 			>
+			<File
+				RelativePath=".\IniFileManagerTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IniFileManagerTestSuite.h"
+				>
+			</File>
 			<File
 				RelativePath=".\ScriptTestSuite.cpp"
 				>
