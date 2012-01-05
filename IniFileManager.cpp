@@ -5,8 +5,7 @@
 
 bool IniFileManager::loadIniFile( const std::string & fileName )
 {
-	m_fileName = fileName;
-	
+
 	std::fstream fs;
 	fs.open( fileName.c_str() , std::ios::in | std::ios::_Nocreate );
 	if( !fs.is_open() ) return false;
@@ -80,9 +79,23 @@ std::string IniFileManager::getValue( const std::string & sectionName , const st
 	return it2->second;
 }
 
-bool IniFileManager::saveIniFile()
+bool IniFileManager::saveIniFile( const std::string & fileName )
 {
+	std::fstream fs;
+	fs.open( fileName.c_str() , std::ios::in | std::ios::trunc | std::ios::out);
+	if( !fs.is_open() ) return false;
 	
+	for( sectionMapItor it = m_sectionMap.begin() ; it != m_sectionMap.end(); it++ )
+	{
+		fs<<'['<<it->first<<']'<<std::endl;
+		for( keyMapItor it2 = it->second.begin(); it2 != it->second.end() ; it2++ )
+		{
+			fs<<it2->first<<'='<<it2->second<<std::endl;
+		}
+		fs<<std::endl;
+	}
+
+	fs.close();
 	return true;
 }
 
@@ -155,7 +168,7 @@ bool IniFileManager::updateKey( const std::string & sectionName , const std::str
 	if ( it == m_sectionMap.end() ) return false;
 
 	keyMapItor it2 = it->second.find( keyName );
-	if( it2 != it->second.end() ) return false;
+	if( it2 == it->second.end() ) return false;
 
 	it2->second = value;
 	return true;
