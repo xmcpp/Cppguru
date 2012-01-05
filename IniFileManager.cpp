@@ -3,7 +3,7 @@
 #include "StringTools.h"
 #include <fstream>
 
-bool IniFileManager::openIniFile( const std::string & fileName )
+bool IniFileManager::loadIniFile( const std::string & fileName )
 {
 	m_fileName = fileName;
 	
@@ -11,6 +11,8 @@ bool IniFileManager::openIniFile( const std::string & fileName )
 	fs.open( fileName.c_str() , std::ios::in | std::ios::_Nocreate );
 	if( !fs.is_open() ) return false;
 	
+	clearAllData();
+
 	std::string data;
 	std::string key,value;
 	std::string sectionName;
@@ -21,12 +23,17 @@ bool IniFileManager::openIniFile( const std::string & fileName )
 		if( isSectionName( data ) )
 		{
 			parseSectionName( data , sectionName );
-			
+			if( !hasSectionName(sectionName) )
+				createSection( sectionName );
 			
 		}
 		else if( isKeyValue( data ) )
 		{
 			parseKeyValue( data , key , value );
+			if( hasKeyName(sectionName,key))
+				updateKey( sectionName , key , value );
+			else
+				insertKey( sectionName , key , value );
 		}
 		
 	}
@@ -58,7 +65,7 @@ void IniFileManager::getKeyName( const std::string & sectionName , std::vector<s
 
 	for(; itBegin != itEnd ; itBegin++ )
 	{
-		nameVec.push_back( itBegin->second );
+		nameVec.push_back( itBegin->first );
 	}
 }
 
@@ -73,23 +80,86 @@ std::string IniFileManager::getValue( const std::string & sectionName , const st
 	return it2->second;
 }
 
-bool IniFileManager::setValue( const std::string & sectionName , const std::string & keyName , const std::string & value )
-{
-	return true;
-}
-
 bool IniFileManager::saveIniFile()
 {
 	
 	return true;
 }
 
-bool IniFileManager::closeIniFile()
+bool IniFileManager::hasSectionName( const std::string & sectionName )
 {
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+	
+	return true;
+}
+
+bool IniFileManager::hasKeyName( const std::string & sectionName , const std::string & keyName )
+{
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+
+	keyMapItor it2 = it->second.find( keyName );
+	if( it2 == it->second.end() ) return false;
 
 	return true;
 }
 
+bool IniFileManager::createSection( const std::string & sectionName )
+{
+	if( hasSectionName( sectionName ) ) return false;
+	
+	std::map<std::string,std::string> keyValueMap;
+	m_sectionMap.insert( std::make_pair(sectionName,keyValueMap) );
+	return true;
+}
+
+bool IniFileManager::destroySection( const std::string & sectionName )
+{
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+	
+	m_sectionMap.erase( it );
+
+	return true;
+}
+
+bool IniFileManager::insertKey( const std::string & sectionName , const std::string & keyName , const std::string & value )
+{
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+
+	keyMapItor it2 = it->second.find( keyName );
+	if( it2 != it->second.end() ) return false;
+	
+	it->second.insert( std::make_pair(keyName , value));
+	
+	return true;
+}
+
+bool IniFileManager::removeKey( const std::string & sectionName , const std::string & keyName )
+{
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+
+	keyMapItor it2 = it->second.find( keyName );
+	if( it2 == it->second.end() ) return false;
+
+	it->second.erase( it2 );
+	return true;
+}
+
+bool IniFileManager::updateKey( const std::string & sectionName , const std::string & keyName , const std::string & value )
+{
+	sectionMapItor it = m_sectionMap.find( sectionName );
+	if ( it == m_sectionMap.end() ) return false;
+
+	keyMapItor it2 = it->second.find( keyName );
+	if( it2 != it->second.end() ) return false;
+
+	it2->second = value;
+	return true;
+}
 
 bool IniFileManager::isSectionName( const std::string & str )
 {
@@ -120,10 +190,19 @@ void IniFileManager::parseKeyValue( const std::string & str , std::string & keyN
 
 	std::vector<std::string> stringVec;
 	StringTools::splitString( str , stringVec , '=' );
-
+	
+	StringTools::trimBoth( stringVec[0] );
 	keyName = stringVec[0];
 	
-	if( stringVec.size() > 1 ) 
+	if( stringVec.size() > 1 )
+	{
+		StringTools::trimBoth( stringVec[1] );
 		value = stringVec[1];
+	}
 
+}
+
+void IniFileManager::clearAllData()
+{
+	m_sectionMap.clear();
 }
