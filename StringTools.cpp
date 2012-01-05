@@ -28,3 +28,35 @@ void StringTools::splitString( const std::string & srcString , std::vector<std::
 		stringVec.push_back( word );
 	}
 }
+
+void StringTools::trimBoth( std::string & srcString )
+{
+	if( srcString.length() == 0 ) return;
+	std::string::iterator itBegin , itEnd;
+
+	itBegin = srcString.begin();
+	itEnd = srcString.end();
+	while( itBegin != itEnd )
+	{
+		if( *itBegin == ' ' )
+			itBegin++;
+		else
+			break;
+	}
+	srcString.assign( itBegin , itEnd );
+	
+	itBegin = srcString.begin();
+	itEnd = srcString.end();
+
+	if( itEnd != srcString.begin() ) itEnd--;
+	while( itEnd != itBegin )
+	{
+		if( *itEnd == ' ' )
+			itEnd--;
+		else
+			break;
+	}
+	if( itEnd != srcString.end() ) itEnd++;
+		
+	srcString.assign( itBegin , itEnd );
+}
