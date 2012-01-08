@@ -26,8 +26,8 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 
-#ifndef __StringConverter_H__
-#define __StringConverter_H__
+#ifndef __STRINGCONVERTER_H__
+#define __STRINGCONVERTER_H__
 
 
 class StringConverter
@@ -84,10 +84,11 @@ public:
     */
     static unsigned long parseUnsignedLong(const std::string& val);
     
+	static bool parseBool( const std::string& val );
 };
 
 
 
 
-#endif
+#endif //__STRINGCONVERTER_H__
 

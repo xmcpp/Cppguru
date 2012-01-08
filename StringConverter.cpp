@@ -116,5 +116,13 @@ unsigned long StringConverter::parseUnsignedLong(const std::string& val)
 	return ret;
 }
 
+bool StringConverter::parseBool( const std::string& val )
+{
+	bool ret = false;
+	if ( val == "True" || val == "true" || val == "TRUE" )
+		ret = true;
+	return ret;
+}
+
 
 
