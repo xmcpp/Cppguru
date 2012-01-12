@@ -4,7 +4,7 @@
 template<> GameStateManager* Singleton<GameStateManager>::ms_Singleton	= 0;
 
 GameStateManager::GameStateManager()
-:m_curState(NULL)
+:m_curState(NULL),m_needStartState(false)
 {
 
 }
@@ -44,12 +44,11 @@ void GameStateManager::changeState( const std::string & stateName )
 	{
 		if( m_curState != itor->second && m_curState != 0 )
 		{
-			m_curState->exitState();
+			m_curState->endState();
 		}
 
 		m_curState = itor->second;
-
-		m_curState->enterState();
+		m_needStartState = true;
 	}
 	else
 	{
@@ -57,13 +56,23 @@ void GameStateManager::changeState( const std::string & stateName )
 	}
 }
 
-void GameStateManager::update( float time )
+void GameStateManager::update( unsigned long millisecond )
 {
-	if( !m_curState )
-	{
-		return;
-	}
+	if( !m_curState )	return;
 
-	m_curState->executeState( time );
+	if( m_needStartState )
+	{
+		m_curState->beginState();
+		m_needStartState = false;
+	}
+	else
+		m_curState->updateState( millisecond );
 }
 
+void GameStateManager::restartState()
+{
+	if( !m_curState ) return;
+	
+	m_curState->endState();
+	m_needStartState = true;
+}
