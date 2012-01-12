@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\;..\..\3rdLib\include\lua;..\..\3rdLib\include\vld"
+				AdditionalIncludeDirectories="..\..\3rdLib\include\;..\;..\..\3rdLib\include\lua;..\..\3rdLib\include\vld;..\..\3rdlib\include\boost"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				AdditionalDependencies="gtestd.lib lua514d.lib tolua++d.lib vld.lib"
 				OutputFile="../bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug;../../3rdlib/lib/vld/release"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\GTest\Debug;../../3rdlib/lib/lua/debug;../../3rdlib/lib/vld/release;../../3rdlib/lib/boost/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -200,6 +200,14 @@
 			</File>
 			<File
 				RelativePath="..\ActionObjectSet.h"
+				>
+			</File>
+			<File
+				RelativePath="..\BoostThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\BoostThread.h"
 				>
 			</File>
 			<File
@@ -437,6 +445,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ThreadTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ThreadTestSuite.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TimerTestSuite.cpp"
 				>
 			</File>
@@ -490,6 +506,14 @@
 			</File>
 			<File
 				RelativePath=".\TestPollMonitorObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestThread.h"
 				>
 			</File>
 			<File
