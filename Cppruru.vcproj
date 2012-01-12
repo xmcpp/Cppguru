@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../3rdlib/include/lua;../3rdlib/include/sqlite"
+				AdditionalIncludeDirectories="../3rdlib/include/lua;../3rdlib/include/sqlite;../3rdlib/include/boost"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,10 +62,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua514d.lib sqlite379.lib"
+				AdditionalDependencies="lua514d.lib sqlite379.lib libboost_thread-vc90-mt-gd-1_48.lib"
 				OutputFile="./bin/$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug;../3rdlib/lib/sqlite/release"
+				AdditionalLibraryDirectories="../3rdlib/lib/lua/debug;../3rdlib/lib/sqlite/release;../3rdlib/lib/boost/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -565,6 +565,14 @@
 		<Filter
 			Name="Thread"
 			>
+			<File
+				RelativePath=".\BoostThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BoostThread.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Threadbase.cpp"
 				>

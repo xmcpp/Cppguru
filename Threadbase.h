@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __THREADBASE_H__
+#define __THREADBASE_H__
 
 #include <windows.h>
 
@@ -44,3 +45,4 @@ private:
 	static DWORD WINAPI trueThreadProc(LPVOID pParam);
 };
 
+#endif //__THREADBASE_H__
