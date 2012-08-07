@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cppguru", "Cppruru.vcproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcproj", "{E44D6BA3-9503-4E23-9D31-782ECBCC4319}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkCore", "Network\NetworkCore.vcproj", "{5ED39BD7-EDE2-46B2-9BF0-785F7D67E38D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{E44D6BA3-9503-4E23-9D31-782ECBCC4319}.Debug|Win32.Build.0 = Debug|Win32
 		{E44D6BA3-9503-4E23-9D31-782ECBCC4319}.Release|Win32.ActiveCfg = Release|Win32
 		{E44D6BA3-9503-4E23-9D31-782ECBCC4319}.Release|Win32.Build.0 = Release|Win32
+		{5ED39BD7-EDE2-46B2-9BF0-785F7D67E38D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5ED39BD7-EDE2-46B2-9BF0-785F7D67E38D}.Debug|Win32.Build.0 = Debug|Win32
+		{5ED39BD7-EDE2-46B2-9BF0-785F7D67E38D}.Release|Win32.ActiveCfg = Release|Win32
+		{5ED39BD7-EDE2-46B2-9BF0-785F7D67E38D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
