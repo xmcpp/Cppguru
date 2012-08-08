@@ -298,6 +298,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Example"
+			>
+			<File
+				RelativePath=".\TestServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestServer.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

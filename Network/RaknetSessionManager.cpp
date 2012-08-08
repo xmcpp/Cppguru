@@ -1,5 +1,18 @@
 #include "stdafx.h"
 #include "RaknetSessionManager.h"
+#include "RaknetNetworkCore.h"
+
+bool RaknetSessionManager::createSession( bool isServer , const std::string & ipAddr , uint16_t port , const std::string & password )
+{
+	if ( !isServer )
+	{
+		//如果是客户端，则地址不能为空
+		if ( ipAddr == "" )
+			return false;
+	}
+
+		
+}
 
 bool RaknetSessionManager::registerServerSession( ServerSession * pSession )
 {

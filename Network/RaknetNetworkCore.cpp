@@ -30,7 +30,7 @@ bool RaknetNetworkCore::init( ServerEnv * env )
 	//初始化session管理器对象
 	if( !m_sessionMgr )
 	{
-		m_sessionMgr = new RaknetSessionManager();
+		m_sessionMgr = new RaknetSessionManager( this );
 	}
 	
 	//设置服务器状态
@@ -117,6 +117,7 @@ ServerSession * RaknetNetworkCore::createServerSession( const std::string & ipAd
 	if( m_coreState != RUNNING )
 		return NULL;
 	
+
 	//发送与远端连接的请求
 	if( !m_localServer->Connect( ipAddr.c_str() , port , password.c_str() , (uint32_t)password.length() ) )
 	{
@@ -124,11 +125,16 @@ ServerSession * RaknetNetworkCore::createServerSession( const std::string & ipAd
 		return NULL;
 	}
 
+	
 	//创建Session对象
 	RaknetServerSession * pSession = new RaknetServerSession( this );
 
 	//设置连接成功为false
 	pSession->setConnected( false );
+	
+	//设置本Session的类型为INVALID，因为还未连接成功，故属于无效session
+	pSession->setSessionType( INVALID );
+
 
 	//由于自身连接远端服务器，即为connector,故设置为true
 	pSession->setConnector( true );
@@ -137,15 +143,10 @@ ServerSession * RaknetNetworkCore::createServerSession( const std::string & ipAd
 	pSession->setRemoteIpAddr( ipAddr );
 	pSession->setRemotePort( (unsigned short)port );
 	pSession->setRemotePass( password );
-
-	//设置本Session的类型为INVALID，因为还未连接成功，故属于无效session
-	pSession->setSessionType( INVALID );
-		
-	//将session保存等待回应
-	m_addr.SetBinaryAddress( ipAddr.c_str());
-
-	m_addr.SetPort( port );
-	m_tempSessionMap.insert( std::make_pair( m_addr , pSession ) );
+	
+	//存储在临时对象中，等待回应
+	RakNet::SystemAddress addr( ipAddr.c_str() , port );
+	m_tempSessionMap.insert( std::make_pair( RakNet::SystemAddress::ToInteger(addr) , pSession ) );
 
 	return pSession ;
 }
@@ -161,7 +162,7 @@ bool RaknetNetworkCore::destroyServerSession( ServerSession * pSession )
 		m_addr.SetBinaryAddress( pSession->getRemoteIpAddr().c_str() );
 		m_addr.SetPort( pSession->getRemotePort() );
 		
-		tempSessionMap::iterator it = m_tempSessionMap.find( m_addr );
+		tempSessionMap::iterator it = m_tempSessionMap.find( RakNet::SystemAddress::ToInteger( m_addr ) );
 		if( it != m_tempSessionMap.end() )
 			m_tempSessionMap.erase( it );
 		else
@@ -277,7 +278,7 @@ void RaknetNetworkCore::processNetworkPacket( RakNet::Packet * packet )
 	case ID_CONNECTION_REQUEST_ACCEPTED : //表示连接远端服务器成功
 		{
 			//查询临时Session对象
-			tempSessionMap::iterator it = m_tempSessionMap.find( packet->systemAddress );
+			tempSessionMap::iterator it = m_tempSessionMap.find( RakNet::SystemAddress::ToInteger( packet->systemAddress ) );
 			if( it == m_tempSessionMap.end() )
 			{
 				//表示当前的session未找到，出现未请求的session的回应，出现的可能是用户创建session后未等待回应直接调用destroy方法删除。
@@ -305,7 +306,7 @@ void RaknetNetworkCore::processNetworkPacket( RakNet::Packet * packet )
 			m_sessionMgr->registerServerSession( pSession );
 
 			//发送连接成功的事件
-			pSession->onAccepted();
+			std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &NetWorkCoreListener::onAccepted ) , pSession ) );
 		}
 		break;
 	case ID_CONNECTION_ATTEMPT_FAILED : //表示连接服务器失败
@@ -322,7 +323,7 @@ void RaknetNetworkCore::processNetworkPacket( RakNet::Packet * packet )
 				m_sessionMgr->unregisterServerSession( packet->guid.systemIndex );
 
 				//发送断开连接事件
-				pSession->onDisConnected();
+				std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &NetWorkCoreListener::onDisConnected ) , pSession ) );
 
 				//删除该连接对象
 				delete pSession;
@@ -340,7 +341,7 @@ void RaknetNetworkCore::processNetworkPacket( RakNet::Packet * packet )
 				m_sessionMgr->unregisterServerSession( packet->guid.systemIndex );
 
 				//发送丢失连接事件
-				pSession->onLostConnected();
+				std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &NetWorkCoreListener::onLostConnected ) , pSession ) );
 
 				//删除该连接对象
 				delete pSession;

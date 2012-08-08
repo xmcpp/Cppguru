@@ -120,8 +120,12 @@ private:
 	MessageData			m_recvData;
 
 	//用于保存请求连接远端的session的集合，表示还没有连接上的，如果连接上则转移到管理器中
-	std::map<RakNet::SystemAddress , ServerSession*>	m_tempSessionMap;
-	typedef std::map<RakNet::SystemAddress , ServerSession*> tempSessionMap;
+	std::map<unsigned long , ServerSession*>	m_tempSessionMap;
+	typedef std::map<unsigned long , ServerSession*> tempSessionMap;
+	
+	//用于保存作为server的session
+	std::map<unsigned long , ServerSession*>	m_serverSessionMap;
+	typedef std::map<unsigned long , ServerSession*> serverSessionMap;
 	
 	//保存监听者指针
 	std::set<NetWorkCoreListener*>				m_listenerSet;

@@ -33,7 +33,7 @@ void RaknetServerSession::update()
 {
 
 }
-
+/*
 void RaknetServerSession::addListener( ServerSessionListener * pListener )
 {
 	if( pListener )
@@ -44,33 +44,34 @@ void RaknetServerSession::removeListener( ServerSessionListener * pListener )
 {
 	if( pListener )
 		m_listenerSet.erase( pListener );
-}
+}*/
 
 void RaknetServerSession::onAccepted( )
 {
-	std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onAccepted ) , this ) );
+	//std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onAccepted ) , this ) );
 }
 
 void RaknetServerSession::onConnected( )
 {
-	std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onConnected ) , this ) );
+	//std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onConnected ) , this ) );
 }
 
 void RaknetServerSession::onDisConnected( )
 {
-	std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onDisConnected ) , this ) );
+	//std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onDisConnected ) , this ) );
 }
 
 void RaknetServerSession::onLostConnected( )
 {
-	std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onLostConnected ) , this ) );
+	//std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &ServerSessionListener::onLostConnected ) , this ) );
 }
 
 void RaknetServerSession::onDataRecv( const MessageData & data )
 {
+	/*
 	for( listenerSet::iterator it = m_listenerSet.begin(),itEnd = m_listenerSet.end() ; it != itEnd ; it++ )
 	{
 		(*it)->onDataRecv( this , data );
-	}
+	}*/
 }
 

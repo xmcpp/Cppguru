@@ -4,7 +4,7 @@
 #include "NetworkCoreInterface.h"
 
 class ServerSession;
-
+class RaknetNetworkCore;
 /** 基于Raknet的网络通信对象管理器
 @class RaknetSessionManager
 
@@ -23,10 +23,14 @@ class RaknetSessionManager : public SessionManager
 {
 	friend class RaknetNetworkCore;
 private:
-	RaknetSessionManager(){};
+	RaknetSessionManager( RaknetNetworkCore * core )
+		:m_networkCore(NULL)
+	{};
 	virtual ~RaknetSessionManager(){};
 
 public:
+	bool createSession( bool isServer , const std::string & ipAddr , uint16_t port , const std::string & password );
+
 	///通信对象注册
 	bool registerServerSession( ServerSession * pSession );
 	
@@ -53,7 +57,7 @@ private:
 	///保存通信对象
 	std::map<uint16_t , ServerSession*> m_sessionMap;
 	typedef std::map<uint16_t , ServerSession*> sessionMap;
-
+	RaknetNetworkCore * m_networkCore;
 };
 
 #endif //_RAKNETSESSIONMANAGER_H_

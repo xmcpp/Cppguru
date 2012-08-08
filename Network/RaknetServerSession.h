@@ -57,10 +57,10 @@ public:
 	void update();
 	
 	///添加监听者
-	void addListener( ServerSessionListener * pListener );
+	//void addListener( ServerSessionListener * pListener );
 	
 	///删除监听者
-	void removeListener( ServerSessionListener * pListener );
+	//void removeListener( ServerSessionListener * pListener );
 private:
 	void onAccepted( );
 	void onConnected( ) ;
@@ -89,8 +89,8 @@ private:
 	RaknetNetworkCore *	m_core;
 	
 	///保存监听者集合
-	std::set<ServerSessionListener*>				m_listenerSet;
-	typedef std::set<ServerSessionListener*>		listenerSet;
+	//std::set<ServerSessionListener*>				m_listenerSet;
+	//typedef std::set<ServerSessionListener*>		listenerSet;
 };
 
 #endif //_RAKNETSERVERSESSION_H_

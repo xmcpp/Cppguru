@@ -52,12 +52,13 @@ enum SESSION_TYPE{	INVALID = 0,		///表示无效连接，暂时还没有连通
 @date 2009-09-19
 
 */
+/*
 class NetWorkCoreListener
 {
 public:
 	//表示有一个连接请求被本机接受
 	virtual void onAcceptRemoteConnect( ServerSession * pSession ) = 0;
-};
+};*/
 
 
 /** 网络通信对象基类
@@ -73,7 +74,7 @@ public:
 @date 2009-09-19
 
 */
-class ServerSessionListener
+class NetWorkCoreListener
 {
 public:
 	///表示本机发出的请求被接受事件
@@ -88,6 +89,9 @@ public:
 	///表示与远端连接非正常断开事件
 	virtual void onLostConnected( ServerSession * pSession ) {};
 	
+	///表示有一个连接请求被本机接受
+	virtual void onAcceptRemoteConnect( ServerSession * pSession ){};
+
 	///表示收到远端传送来的数据事件
 	virtual void onDataRecv( ServerSession * pSession , const MessageData & data ) {};
 };
@@ -309,10 +313,10 @@ public:
 	virtual void update() = 0;
 	
 	///添加监听者
-	virtual void addListener( ServerSessionListener * pListener ) = 0;
+	//virtual void addListener( ServerSessionListener * pListener ) = 0;
 	
 	//移出监听者
-	virtual void removeListener( ServerSessionListener * pListener ) = 0;
+	//virtual void removeListener( ServerSessionListener * pListener ) = 0;
 };
 
 /** 网络通信对象管理器抽象基类
@@ -332,6 +336,9 @@ public:
 class SessionManager
 {
 public:
+
+	virtual bool createSession( bool isServer , const std::string & ipAddr , uint16_t port , const std::string & password ) = 0;
+
 	/**注册通信对象
 	@remarks
 		该方法用于向管理器注册通信对象。如果该对象未连接则无法注册成功。
