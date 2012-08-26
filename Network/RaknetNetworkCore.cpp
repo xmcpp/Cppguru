@@ -59,7 +59,8 @@ bool RaknetNetworkCore::startService()
 	//启动Raknet线程监听
 	RakNet::SocketDescriptor Des( m_localPort , m_localIp.c_str() );
 	m_localServer->SetIncomingPassword( m_localPassword.c_str() , ( uint32_t )m_localPassword.length() );
-	if( !m_localServer->Startup( m_localMaxConnectionCount , &Des , 1 ) )
+	Des.socketFamily = AF_INET;
+	if( m_localServer->Startup( m_localMaxConnectionCount , &Des , 1 ) != RakNet::RAKNET_STARTED )
 		return false;
 
 	m_localServer->SetMaximumIncomingConnections( m_localMaxConnectionCount );
@@ -119,7 +120,7 @@ ServerSession * RaknetNetworkCore::createServerSession( const std::string & ipAd
 	
 
 	//发送与远端连接的请求
-	if( !m_localServer->Connect( ipAddr.c_str() , port , password.c_str() , (uint32_t)password.length() ) )
+	if( m_localServer->Connect( ipAddr.c_str() , port , password.c_str() , (uint32_t)password.length() ) != RakNet::CONNECTION_ATTEMPT_STARTED )
 	{
 		//连接请求失败，返回空
 		return NULL;
@@ -310,7 +311,24 @@ void RaknetNetworkCore::processNetworkPacket( RakNet::Packet * packet )
 		}
 		break;
 	case ID_CONNECTION_ATTEMPT_FAILED : //表示连接服务器失败
+		{
+			//查询临时Session对象
+			tempSessionMap::iterator it = m_tempSessionMap.find( RakNet::SystemAddress::ToInteger( packet->systemAddress ) );
+			if( it == m_tempSessionMap.end() )
+			{
+				//表示当前的session未找到，出现未请求的session的回应，出现的可能是用户创建session后未等待回应直接调用destroy方法删除。
+				return ;
+			}
+			RaknetServerSession * pSession = dynamic_cast<RaknetServerSession *>( it->second );
+			if( pSession )
+			{
+				pSession->setConnected( false );
 
+				//发送连接失败的事件
+				std::for_each( m_listenerSet.begin() , m_listenerSet.end() , std::bind2nd( std::mem_fun( &NetWorkCoreListener::onConnectFailed ) , pSession ) );
+			}	
+			
+		}
 		break;
 	case ID_DISCONNECTION_NOTIFICATION: //表示连接正常关闭
 		{

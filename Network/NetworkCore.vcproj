@@ -18,9 +18,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../bin/"
+			OutputDirectory="..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			CharacterSet="1"
 			>
 			<Tool
@@ -61,16 +61,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="Cppguru_d.lib RakNetDLLDebug.lib"
-				AdditionalLibraryDirectories="../bin/;../../3rdlib/lib/Raknet/Debug"
-				SubSystem="1"
+				Name="VCLibrarianTool"
+				AdditionalDependencies="RakNetDLLDebug.lib"
+				OutputFile="../bin/NetworkCore_d.lib"
+				AdditionalLibraryDirectories="..\..\3rdLib\lib\Raknet\Debug"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -80,9 +77,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -295,18 +289,6 @@
 			</File>
 			<File
 				RelativePath=".\RingBuffer.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Example"
-			>
-			<File
-				RelativePath=".\TestServer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TestServer.h"
 				>
 			</File>
 		</Filter>

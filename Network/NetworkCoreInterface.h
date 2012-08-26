@@ -83,6 +83,9 @@ public:
 	///表示远端发出的请求被接受事件
 	virtual void onConnected( ServerSession * pSession ) {};
 	
+	///表示发起的连接请求失败了
+	virtual void onConnectFailed( ServerSession * pSession ) {};
+
 	///表示与远端连接正常断开连接事件
 	virtual void onDisConnected( ServerSession * pSession ) {};
 	
@@ -94,6 +97,7 @@ public:
 
 	///表示收到远端传送来的数据事件
 	virtual void onDataRecv( ServerSession * pSession , const MessageData & data ) {};
+
 };
 
 
